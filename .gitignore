@@ -1,2 +1,4 @@
 scripts
 .idea
+/checkpoints/
+__pycache__

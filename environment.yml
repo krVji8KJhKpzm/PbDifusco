@@ -99,7 +99,7 @@ dependencies:
     - pyasn1==0.4.8
     - pyasn1-modules==0.2.8
     - pydeprecate==0.3.2
-    - pyconcorde @ git+https://github.com/jvkersch/pyconcorde
+    # - pyconcorde @ git+https://github.com/jvkersch/pyconcorde
     - pyparsing==3.0.9
     - pyrss2gen==1.1
     - pysocks==1.7.1
