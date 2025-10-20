@@ -71,6 +71,8 @@ def arg_parser():
   parser.add_argument("--resume_id", type=str, default=None, help="Resume training on wandb.")
   parser.add_argument('--ckpt_path', type=str, default=None)
   parser.add_argument('--resume_weight_only', action='store_true')
+  parser.add_argument('--wandb_offline', action='store_true',
+                      help='Run Weights & Biases in offline mode (no cloud sync).')
 
   parser.add_argument('--do_train', action='store_true')
   parser.add_argument('--do_test', action='store_true')
@@ -136,6 +138,10 @@ def main(args):
     raise NotImplementedError
 
   model = model_class(param_args=args)
+
+  # Optionally force W&B offline to avoid cloud sync
+  if getattr(args, 'wandb_offline', False):
+    os.environ['WANDB_MODE'] = 'offline'
 
   wandb_id = os.getenv("WANDB_RUN_ID") or wandb.util.generate_id()
   wandb_logger = WandbLogger(

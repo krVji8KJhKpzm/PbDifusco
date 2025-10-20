@@ -50,6 +50,7 @@ def build_base_args(parser: argparse.ArgumentParser):
   parser.add_argument('--wandb_entity', type=str, default=None)
   parser.add_argument('--wandb_logger_name', type=str, default=None)
   parser.add_argument('--resume_id', type=str, default=None)
+  parser.add_argument('--wandb_offline', action='store_true')
   parser.add_argument('--ckpt_path', type=str, default=None)
   parser.add_argument('--resume_weight_only', action='store_true')
 
@@ -104,6 +105,8 @@ def to_argv(args: argparse.Namespace, phase_epochs: int, extra_flags: list):
       '--wandb_logger_name', args.wandb_logger_name or 'auto_train_pref',
       '--resume_id', args.resume_id,
   ]
+  if args.wandb_offline:
+    argv += ['--wandb_offline']
 
   if args.training_split_label_dir is not None:
     argv += ['--training_split_label_dir', args.training_split_label_dir]
