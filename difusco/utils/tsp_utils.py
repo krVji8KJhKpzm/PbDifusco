@@ -154,3 +154,123 @@ class TSPEvaluator(object):
     for i in range(len(route) - 1):
       total_cost += self.dist_mat[route[i], route[i + 1]]
     return total_cost
+
+
+# ===== New helpers for multi-start greedy decoding =====
+def numpy_merge_stochastic(points, adj_mat, noise_scale=1e-3, rng=None):
+  """Greedy edge insertion with stochastic tie-break by adding noise to ranking."""
+  if rng is None:
+    rng = np.random.default_rng()
+  dists = np.linalg.norm(points[:, None] - points, axis=-1)
+
+  components = np.zeros((adj_mat.shape[0], 2)).astype(int)
+  components[:] = np.arange(adj_mat.shape[0])[..., None]
+  real_adj_mat = np.zeros_like(adj_mat)
+
+  # Scores: prefer large adj and small distance
+  scores = -adj_mat / (dists + 1e-9)
+  jitter = rng.normal(loc=0.0, scale=noise_scale, size=scores.shape)
+  scores = scores + jitter
+
+  merge_iterations = 0
+  for edge in scores.flatten().argsort():
+    merge_iterations += 1
+    a, b = edge // adj_mat.shape[0], edge % adj_mat.shape[0]
+    if not (a in components and b in components):
+      continue
+    ca = np.nonzero((components == a).sum(1))[0][0]
+    cb = np.nonzero((components == b).sum(1))[0][0]
+    if ca == cb:
+      continue
+    cca = sorted(components[ca], key=lambda x: x == a)
+    ccb = sorted(components[cb], key=lambda x: x == b)
+    newc = np.array([[cca[0], ccb[0]]])
+    m, M = min(ca, cb), max(ca, cb)
+    real_adj_mat[a, b] = 1
+    components = np.concatenate([components[:m], components[m + 1:M], components[M + 1:], newc], 0)
+    if len(components) == 1:
+      break
+  real_adj_mat[components[0, 1], components[0, 0]] = 1
+  real_adj_mat += real_adj_mat.T
+  return real_adj_mat, merge_iterations
+
+
+def build_real_adj_from_heatmap(adj_mat, np_points, edge_index_np=None, sparse_graph=False,
+                                random_tiebreak=False, noise_scale=1e-3):
+  """Build the symmetric real adjacency matrix via greedy merge from a heatmap.
+
+  Returns (real_adj_mat, merge_iterations).
+  """
+  if not sparse_graph:
+    sym_adj = adj_mat[0] + adj_mat[0].T
+  else:
+    if edge_index_np is None:
+      raise ValueError("edge_index_np is required for sparse graphs")
+    sym_adj = scipy.sparse.coo_matrix(
+        (adj_mat, (edge_index_np[0], edge_index_np[1])),
+    ).toarray() + scipy.sparse.coo_matrix(
+        (adj_mat, (edge_index_np[1], edge_index_np[0])),
+    ).toarray()
+
+  # Prefer stochastic numpy merge when randomness is requested; else use Cython
+  if random_tiebreak:
+    real_adj_mat, merge_iterations = numpy_merge_stochastic(np_points, sym_adj, noise_scale=noise_scale)
+  else:
+    real_adj_mat, merge_iterations = cython_merge(np_points, sym_adj)
+  return real_adj_mat, merge_iterations
+
+
+def decode_tour_from_real_adj(real_adj_mat, start_node=0, random_tiebreak=False, rng=None):
+  """Decode a single tour from a 0/1 adjacency matrix starting at `start_node`.
+
+  If `random_tiebreak` is True, when two neighbors are available (first step),
+  pick randomly instead of deterministically.
+  """
+  n = real_adj_mat.shape[0]
+  start_node = int(start_node % n)
+  tour = [start_node]
+  if rng is None:
+    rng = np.random.default_rng()
+  while len(tour) < n + 1:
+    neighbors = np.nonzero(real_adj_mat[tour[-1]])[0]
+    if len(tour) > 1:
+      neighbors = neighbors[neighbors != tour[-2]]
+    if random_tiebreak and len(neighbors) > 1 and len(tour) == 1:
+      # Randomly choose direction on the cycle only at the first step
+      idx = rng.integers(low=0, high=len(neighbors))
+      next_node = neighbors[idx]
+    else:
+      # Deterministic tie-breaker: pick max index (matches original)
+      next_node = neighbors.max()
+    tour.append(int(next_node))
+  return tour
+
+
+def multi_start_tours(adj_mat, np_points, edge_index_np=None, start_nodes=None, sparse_graph=False,
+                      random_tiebreak=False, noise_scale=1e-3):
+  """Generate tours by greedy decoding from multiple start nodes on the same heatmap.
+
+  Args:
+    adj_mat: (1, N, N) heatmap if dense or (E,) if sparse
+    np_points: (N, 2)
+    edge_index_np: (2, E) for sparse graphs
+    start_nodes: iterable of distinct start node indices
+    sparse_graph: whether input is sparse
+
+  Returns:
+    tours: list of tours in the same index space as np_points
+    merge_iterations: float
+  """
+  real_adj_mat, merge_iterations = build_real_adj_from_heatmap(
+      adj_mat, np_points, edge_index_np=edge_index_np, sparse_graph=sparse_graph,
+      random_tiebreak=random_tiebreak, noise_scale=noise_scale)
+
+  n = np_points.shape[0]
+  if start_nodes is None:
+    start_nodes = [0]
+  # Sanitize and uniquify
+  start_nodes = sorted({int(s % n) for s in start_nodes})
+  rng = np.random.default_rng()
+  tours = [decode_tour_from_real_adj(real_adj_mat, s, random_tiebreak=random_tiebreak, rng=rng)
+           for s in start_nodes]
+  return tours, merge_iterations

@@ -12,7 +12,7 @@ from pytorch_lightning.utilities import rank_zero_info
 from co_datasets.tsp_graph_dataset import TSPGraphDataset
 from pl_meta_model import COMetaModel
 from utils.diffusion_schedulers import InferenceSchedule
-from utils.tsp_utils import TSPEvaluator, batched_two_opt_torch, merge_tours
+from utils.tsp_utils import TSPEvaluator, batched_two_opt_torch, merge_tours, multi_start_tours
 
 
 class TSPModel(COMetaModel):
@@ -114,10 +114,183 @@ class TSPModel(COMetaModel):
     return loss
 
   def training_step(self, batch, batch_idx):
+    # Preference RL fine-tune path (on top of supervised pretraining)
+    if getattr(self.args, 'pref_rl', False):
+      return self.preference_training_step(batch, batch_idx)
     if self.diffusion_type == 'gaussian':
       return self.gaussian_training_step(batch, batch_idx)
     elif self.diffusion_type == 'categorical':
       return self.categorical_training_step(batch, batch_idx)
+
+  def _edge_probs_from_logits(self, x0_pred, points):
+    """Convert logits to Bernoulli p(edge=1) matrix per sample (dense graphs)."""
+    if self.sparse:
+      raise ValueError("Preference RL currently supports dense TSP only (sparse not supported).")
+    x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+    p1 = x0_pred_prob[..., 1]
+    return p1
+
+  def _tour_logprob_from_edge_probs(self, p1_mat, tour):
+    """Sum log-prob over directed edges along a closed tour.
+    p1_mat: (N, N) torch tensor of p(edge=1)
+    tour: list/array of node indices, length N+1 with closure
+    """
+    eps = 1e-9
+    total = 0.0
+    for i in range(len(tour) - 1):
+      u = int(tour[i])
+      v = int(tour[i + 1])
+      total = total + torch.log(p1_mat[u, v].clamp_min(eps))
+    return total
+
+  def preference_training_step(self, batch, batch_idx):
+    if self.diffusion_type != 'categorical':
+      raise ValueError("Preference RL fine-tuning is implemented for categorical diffusion only.")
+    if self.sparse:
+      # Could be extended; keep scope tight per request (TSP dense)
+      raise ValueError("Preference RL currently supports dense TSP only (set sparse_factor<=0)")
+
+    # Unpack batch (dense case)
+    real_batch_idx, points, adj_matrix, gt_tour = batch
+    device = points.device
+
+    batch_size = points.shape[0]
+    steps = self.args.inference_diffusion_steps
+    time_schedule = InferenceSchedule(
+        inference_schedule=self.args.inference_schedule,
+        T=self.diffusion.T, inference_T=steps)
+
+    # Initialize xt ~ Bernoulli(0.5)
+    xt = (torch.randn_like(adj_matrix.float()) > 0).long()
+
+    # Preference application policy
+    apply_last_k_only = bool(getattr(self.args, 'pref_apply_last_k_only', False))
+    last_k_steps = int(getattr(self.args, 'pref_last_k_steps', 10))
+    if apply_last_k_only:
+      used_step_ids = list(range(max(0, steps - last_k_steps), steps))
+    else:
+      # Only use the fully denoised heatmap (final step)
+      used_step_ids = [steps - 1]
+
+    selected_edge_probs = []  # will hold p(edge=1) for selected steps only
+
+    # Diffusion denoising; run no-grad except selected steps to keep VRAM flat
+    for i in range(steps):
+      t1, t2 = time_schedule(i)
+      t1 = np.array([t1]).astype(int)
+      t2 = np.array([t2]).astype(int)
+
+      if i in used_step_ids:
+        t_tensor = torch.from_numpy(t1).view(1)
+        x0_pred = self.forward(
+            points.float().to(device),
+            xt.float().to(device),
+            t_tensor.float().to(device),
+            None,
+        )
+        p1 = self._edge_probs_from_logits(x0_pred, points)  # (B, N, N)
+        selected_edge_probs.append((i, p1))
+
+        # Posterior update to next xt (no gradient through sampling)
+        with torch.no_grad():
+          x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+          xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
+      else:
+        with torch.no_grad():
+          t_tensor = torch.from_numpy(t1).view(1)
+          x0_pred = self.forward(
+              points.float().to(device),
+              xt.float().to(device),
+              t_tensor.float().to(device),
+              None,
+          )
+          x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+          xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
+
+    # Decode heatmap and build preferences from multi-start greedy paths
+    if self.diffusion_type == 'categorical':
+      adj_mat_np = xt.float().cpu().detach().numpy() + 1e-6
+    else:
+      adj_mat_np = xt.cpu().detach().numpy() * 0.5 + 0.5
+
+    pref_beta = float(getattr(self.args, 'pref_beta', 1.0))
+    num_starts_cfg = int(getattr(self.args, 'pref_num_start_nodes', 8))
+    pairs_per_graph = int(getattr(self.args, 'pref_pairs_per_graph', 1))
+
+    batch_pref_losses = []
+    mean_margins = []
+
+    for b in range(batch_size):
+      np_points = points[b].detach().cpu().numpy()
+      n = np_points.shape[0]
+      # Sample start nodes (unique)
+      num_starts = min(num_starts_cfg, n)
+      start_nodes = torch.randperm(n)[:num_starts].tolist()
+      tours, _ = multi_start_tours(
+          adj_mat_np[b:b+1], np_points, edge_index_np=None,
+          start_nodes=start_nodes, sparse_graph=False,
+          random_tiebreak=bool(getattr(self.args, 'pref_decode_random_tiebreak', False)),
+          noise_scale=float(getattr(self.args, 'pref_decode_noise_scale', 1e-3)))
+
+      # Evaluate costs
+      tsp_solver = TSPEvaluator(np_points)
+      costs = [tsp_solver.evaluate(t) for t in tours]
+      best_idx = int(np.argmin(costs))
+      worse_pool = [i for i in range(len(tours)) if i != best_idx]
+      if not worse_pool:
+        continue  # degenerate case
+
+      # Form preference pairs: (best, sampled worse)
+      worse_sel = worse_pool if len(worse_pool) <= pairs_per_graph else list(np.random.choice(worse_pool, pairs_per_graph, replace=False))
+
+      for wi in worse_sel:
+        t_best = tours[best_idx]
+        t_worse = tours[wi]
+
+        # Aggregate loss across selected steps
+        pair_losses = []
+        margins = []
+        # Use edge probabilities only for selected steps (typically k=1 -> final)
+        for (_, p1_batched) in selected_edge_probs:
+          p1_mat = p1_batched[b]  # (N, N)
+          logp_best = self._tour_logprob_from_edge_probs(p1_mat, t_best)
+          logp_worse = self._tour_logprob_from_edge_probs(p1_mat, t_worse)
+          margin = logp_best - logp_worse
+          margins.append(margin.detach())
+          # Pairwise preference: -log(sigmoid(beta * (logp_best - logp_worse)))
+          pair_losses.append(F.softplus(-pref_beta * margin))
+
+        if pair_losses:
+          pair_loss = torch.stack(pair_losses).mean()
+          batch_pref_losses.append(pair_loss)
+          mean_margins.append(torch.stack(margins).mean())
+
+    # Log selected steps count to audit VRAM invariance in default mode
+    self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
+
+    if not batch_pref_losses:
+      # Fallback: no pairs produced (unlikely). Skip update with zero loss.
+      pref_loss = torch.tensor(0.0, device=device, requires_grad=True)
+      self.log("train/pref_pairs", 0.0)
+      self.log("train/pref_margin", 0.0)
+    else:
+      pref_loss = torch.stack(batch_pref_losses).mean()
+      self.log("train/pref_pairs", float(len(batch_pref_losses)))
+      self.log("train/pref_margin", torch.stack(mean_margins).mean())
+
+    # Optional supervised CE mixing during fine-tune
+    sup_w = float(getattr(self.args, 'pref_supervised_weight', 0.0))
+    rl_w = float(getattr(self.args, 'pref_rl_weight', 1.0))
+    if sup_w > 0.0:
+      ce_loss = self.categorical_training_step(batch, batch_idx)
+      loss = rl_w * pref_loss + sup_w * ce_loss
+      # categorical_training_step already logs train/loss; log combined too
+      self.log("train/pref_loss", pref_loss)
+      self.log("train/total_loss", loss)
+      return loss
+    else:
+      self.log("train/pref_loss", pref_loss)
+      return pref_loss
 
   def categorical_denoise_step(self, points, xt, t, device, edge_index=None, target_t=None):
     with torch.no_grad():

@@ -53,6 +53,18 @@ def arg_parser():
   parser.add_argument('--two_opt_iterations', type=int, default=1000)
   parser.add_argument('--save_numpy_heatmap', action='store_true')
 
+  # Preference RL fine-tuning (on top of supervised pretraining)
+  parser.add_argument('--pref_rl', action='store_true', help='Enable preference RL fine-tuning for TSP.')
+  parser.add_argument('--pref_beta', type=float, default=1.0, help='Inverse-temperature for preference loss.')
+  parser.add_argument('--pref_num_start_nodes', type=int, default=8, help='Number of start nodes per heatmap to decode for preferences.')
+  parser.add_argument('--pref_pairs_per_graph', type=int, default=1, help='Number of preference pairs per graph (best vs sampled worse).')
+  parser.add_argument('--pref_apply_last_k_only', action='store_true', help='Apply preference loss only to the last k denoising steps.')
+  parser.add_argument('--pref_last_k_steps', type=int, default=10, help='How many last steps to apply preference loss to.')
+  parser.add_argument('--pref_supervised_weight', type=float, default=0.0, help='Optional mixing weight for supervised CE during fine-tune.')
+  parser.add_argument('--pref_rl_weight', type=float, default=1.0, help='Weight for preference RL loss when mixed with supervised.')
+  parser.add_argument('--pref_decode_random_tiebreak', action='store_true', help='Use stochastic tie-break in merge/decoding from a single heatmap.')
+  parser.add_argument('--pref_decode_noise_scale', type=float, default=1e-3, help='Noise scale for stochastic merge tie-break.')
+
   parser.add_argument('--project_name', type=str, default='tsp_diffusion')
   parser.add_argument('--wandb_entity', type=str, default=None)
   parser.add_argument('--wandb_logger_name', type=str, default=None)
