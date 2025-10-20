@@ -104,19 +104,29 @@ class COMetaModel(pl.LightningModule):
     """
     diffusion = self.diffusion
 
+    # Normalize t and target_t to Python ints to keep Q tensors 2x2
+    def _to_int_index(x):
+      if isinstance(x, torch.Tensor):
+        return int(x.view(-1)[0].item())
+      if isinstance(x, np.ndarray):
+        return int(x.reshape(-1)[0].item())
+      return int(x)
+
     if target_t is None:
-      target_t = t - 1
+      t_idx = _to_int_index(t)
+      target_idx = max(0, t_idx - 1)
     else:
-      target_t = torch.from_numpy(target_t).view(1)
+      t_idx = _to_int_index(t)
+      target_idx = _to_int_index(target_t)
 
     # Thanks to Daniyar and Shengyu, who found the "target_t == 0" branch is not needed :)
     # if target_t > 0:
-    Q_t = np.linalg.inv(diffusion.Q_bar[target_t]) @ diffusion.Q_bar[t]
+    Q_t = np.linalg.inv(diffusion.Q_bar[target_idx]) @ diffusion.Q_bar[t_idx]
     Q_t = torch.from_numpy(Q_t).float().to(x0_pred_prob.device)
     # else:
     #   Q_t = torch.eye(2).float().to(x0_pred_prob.device)
-    Q_bar_t_source = torch.from_numpy(diffusion.Q_bar[t]).float().to(x0_pred_prob.device)
-    Q_bar_t_target = torch.from_numpy(diffusion.Q_bar[target_t]).float().to(x0_pred_prob.device)
+    Q_bar_t_source = torch.from_numpy(diffusion.Q_bar[t_idx]).float().to(x0_pred_prob.device)
+    Q_bar_t_target = torch.from_numpy(diffusion.Q_bar[target_idx]).float().to(x0_pred_prob.device)
 
     xt = F.one_hot(xt.long(), num_classes=2).float()
     xt = xt.reshape(x0_pred_prob.shape)
@@ -135,7 +145,7 @@ class COMetaModel(pl.LightningModule):
 
     sum_x_t_target_prob += x_t_source_prob_new[..., 1] * x0_pred_prob[..., 1]
 
-    if target_t > 0:
+    if target_idx > 0:
       xt = torch.bernoulli(sum_x_t_target_prob.clamp(0, 1))
     else:
       xt = sum_x_t_target_prob.clamp(min=0)
