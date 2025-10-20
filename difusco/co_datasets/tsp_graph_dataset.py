@@ -4,7 +4,6 @@ import numpy as np
 import torch
 
 from sklearn.neighbors import KDTree
-from torch_geometric.data import Data as GraphData
 
 
 class TSPGraphDataset(torch.utils.data.Dataset):
@@ -66,6 +65,8 @@ class TSPGraphDataset(torch.utils.data.Dataset):
       tour_edges = torch.from_numpy(tour_edges)
       tour_edges = tour_edges.reshape((-1, 1)).repeat(1, sparse_factor).reshape(-1)
       tour_edges = torch.eq(edge_index_1, tour_edges).reshape(-1, 1)
+      # Lazy import to avoid torch_geometric dependency in dense mode
+      from torch_geometric.data import Data as GraphData
       graph_data = GraphData(x=torch.from_numpy(points).float(),
                              edge_index=edge_index,
                              edge_attr=tour_edges)

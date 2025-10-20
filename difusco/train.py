@@ -76,6 +76,20 @@ def arg_parser():
   parser.add_argument('--do_test', action='store_true')
   parser.add_argument('--do_valid_only', action='store_true')
 
+  # Auto-generate TSP instances compatible with dataset format
+  parser.add_argument('--auto_generate', action='store_true',
+                      help='Automatically generate TSP dataset files before training.')
+  parser.add_argument('--auto_num_nodes', type=int, default=50)
+  parser.add_argument('--auto_num_train', type=int, default=100000)
+  parser.add_argument('--auto_num_val', type=int, default=1000)
+  parser.add_argument('--auto_num_test', type=int, default=1000)
+  parser.add_argument('--auto_seed', type=int, default=42)
+  parser.add_argument('--auto_two_opt_iterations', type=int, default=0,
+                      help='Apply 2-opt iterations during generation (0 disables).')
+  parser.add_argument('--auto_save_prefix', type=str, default=None,
+                      help='Optional file prefix for generated files. Defaults to tsp{N}_*.')
+  parser.add_argument('--auto_overwrite', action='store_true')
+
   args = parser.parse_args()
   return args
 
@@ -83,6 +97,34 @@ def arg_parser():
 def main(args):
   epochs = args.num_epochs
   project_name = args.project_name
+
+  # Optionally auto-generate dataset files
+  if args.auto_generate:
+    from utils.tsp_instance_gen import generate_split
+    tsp_dir = os.path.join(args.storage_path, 'data', 'tsp')
+    prefix = args.auto_save_prefix or f"tsp{args.auto_num_nodes}_auto"
+
+    train_path = os.path.join(tsp_dir, f"{prefix}_train.txt")
+    val_path = os.path.join(tsp_dir, f"{prefix}_val.txt")
+    test_path = os.path.join(tsp_dir, f"{prefix}_test.txt")
+
+    if (not os.path.exists(train_path)) or args.auto_overwrite:
+      rank_zero_info(f"Generating train split to {train_path}")
+      generate_split(train_path, args.auto_num_train, args.auto_num_nodes, args.auto_seed,
+                     two_opt_iterations=args.auto_two_opt_iterations)
+    if (not os.path.exists(val_path)) or args.auto_overwrite:
+      rank_zero_info(f"Generating val split to {val_path}")
+      generate_split(val_path, args.auto_num_val, args.auto_num_nodes, args.auto_seed + 1,
+                     two_opt_iterations=args.auto_two_opt_iterations)
+    if (not os.path.exists(test_path)) or args.auto_overwrite:
+      rank_zero_info(f"Generating test split to {test_path}")
+      generate_split(test_path, args.auto_num_test, args.auto_num_nodes, args.auto_seed + 2,
+                     two_opt_iterations=args.auto_two_opt_iterations)
+
+    # Redirect training/val/test splits to generated files
+    args.training_split = os.path.relpath(train_path, args.storage_path)
+    args.validation_split = os.path.relpath(val_path, args.storage_path)
+    args.test_split = os.path.relpath(test_path, args.storage_path)
 
   if args.task == 'tsp':
     model_class = TSPModel
