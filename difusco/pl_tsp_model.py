@@ -259,9 +259,11 @@ class TSPModel(COMetaModel):
         t2 = np.array([t2]).astype(int)
         t_tensor = torch.from_numpy(t1).view(1)
         with torch.cuda.amp.autocast(enabled=use_mixed):
+          # xt may be created under inference_mode earlier; clone to get a normal tensor for autograd
+          xt_in = xt.clone()
           x0_pred = self.forward(
               points.float().to(device),
-              xt.float().to(device),
+              xt_in.float().to(device),
               t_tensor.float().to(device),
               None,
           )
@@ -278,9 +280,10 @@ class TSPModel(COMetaModel):
       t2 = np.array([t2]).astype(int)
       t_tensor = torch.from_numpy(t1).view(1)
       with torch.cuda.amp.autocast(enabled=use_mixed):
+        xt_in = xt.clone()
         x0_pred = self.forward(
             points.float().to(device),
-            xt.float().to(device),
+            xt_in.float().to(device),
             t_tensor.float().to(device),
             None,
         )
@@ -301,9 +304,10 @@ class TSPModel(COMetaModel):
         if i in grad_step_ids:
           t_tensor = torch.from_numpy(t1).view(1)
           with torch.cuda.amp.autocast(enabled=use_mixed):
+            xt_in = xt.clone()
             x0_pred = self.forward(
                 points.float().to(device),
-                xt.float().to(device),
+                xt_in.float().to(device),
                 t_tensor.float().to(device),
                 None,
             )
