@@ -76,6 +76,14 @@ def arg_parser():
   parser.add_argument('--pref_softlen_last_k_steps', type=int, default=10,
                       help='How many last steps to apply soft path-length loss to when enabled.')
 
+  # Anchor to pretrained to avoid drift (pure preference fine-tune stabilization)
+  parser.add_argument('--pref_anchor_type', type=str, default='none',
+                      help="Anchor regularizer type: 'none' or 'l2sp' (weight L2 to pretrained weights).")
+  parser.add_argument('--pref_anchor_weight', type=float, default=0.0,
+                      help='Weight for anchor regularizer to keep close to pretrained (0 disables).')
+  parser.add_argument('--pref_freeze_bottom_layers', type=int, default=0,
+                      help='Freeze the first K GNN layers during fine-tuning to reduce drift.')
+
   parser.add_argument('--project_name', type=str, default='tsp_diffusion')
   parser.add_argument('--wandb_entity', type=str, default=None)
   parser.add_argument('--wandb_logger_name', type=str, default=None)

@@ -35,8 +35,47 @@ class TSPModel(COMetaModel):
         sparse_factor=self.args.sparse_factor,
     )
 
+    # Pretrained anchor snapshot (built lazily on fit start)
+    self._anchor_params = None
+
   def forward(self, x, adj, t, edge_index):
     return self.model(x, t, adj, edge_index)
+
+  def on_fit_start(self):
+    # Optionally freeze bottom K GNN layers
+    k = int(getattr(self.args, 'pref_freeze_bottom_layers', 0))
+    if k > 0:
+      layers = getattr(self.model, 'layers', None)
+      if layers is not None:
+        for idx in range(min(k, len(layers))):
+          for p in layers[idx].parameters():
+            p.requires_grad = False
+        rank_zero_info(f"Froze bottom {min(k, len(layers))} GNN layers for fine-tuning")
+
+    # Build anchor snapshot if requested
+    anchor_type = str(getattr(self.args, 'pref_anchor_type', 'none')).lower()
+    anchor_w = float(getattr(self.args, 'pref_anchor_weight', 0.0))
+    if anchor_type == 'l2sp' and anchor_w > 0.0 and self._anchor_params is None:
+      self._anchor_params = {
+          n: p.detach().clone().to(p.device) for n, p in self.model.named_parameters() if p.requires_grad
+      }
+      rank_zero_info(f"Built L2SP anchor snapshot for {len(self._anchor_params)} params.")
+
+  def _anchor_loss(self):
+    anchor_type = str(getattr(self.args, 'pref_anchor_type', 'none')).lower()
+    anchor_w = float(getattr(self.args, 'pref_anchor_weight', 0.0))
+    if anchor_type == 'l2sp' and anchor_w > 0.0 and self._anchor_params is not None:
+      loss = 0.0
+      for n, p in self.model.named_parameters():
+        if p.requires_grad and n in self._anchor_params:
+          ref = self._anchor_params[n]
+          # Ensure device match
+          if ref.device != p.device:
+            ref = ref.to(p.device)
+            self._anchor_params[n] = ref
+          loss = loss + torch.sum((p - ref) ** 2)
+      return anchor_w * loss
+    return None
 
   def categorical_training_step(self, batch, batch_idx):
     edge_index = None
@@ -424,6 +463,13 @@ class TSPModel(COMetaModel):
     # Add soft length term
     if softlen_weight > 0.0 and softlen_loss is not None:
       total_loss = total_loss + softlen_weight * softlen_loss
+
+    # Anchor regularization to pretrained weights to avoid drift
+    anchor_reg = self._anchor_loss()
+    if anchor_reg is not None:
+      total_loss = total_loss + anchor_reg
+      self.log("train/anchor_loss", anchor_reg)
+      self.log("train/anchor_weight", float(getattr(self.args, 'pref_anchor_weight', 0.0)))
 
     self.log("train/total_loss", total_loss)
     return total_loss
