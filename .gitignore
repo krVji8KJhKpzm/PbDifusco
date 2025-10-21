@@ -2,3 +2,7 @@ scripts
 .idea
 /checkpoints/
 __pycache__
+*.c
+*.so
+*.o
+*.txt
