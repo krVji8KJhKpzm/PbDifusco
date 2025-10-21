@@ -154,6 +154,12 @@ class TSPModel(COMetaModel):
     real_batch_idx, points, adj_matrix, gt_tour = batch
     device = points.device
 
+    # Weights/config (now from self.args)
+    sup_w = float(getattr(self.args, 'pref_supervised_weight', 0.0))
+    rl_w = float(getattr(self.args, 'pref_rl_weight', 1.0))
+    softlen_weight = float(getattr(self.args, 'pref_softlen_weight', 0.0))
+    softlen_degree_lambda = float(getattr(self.args, 'pref_softlen_degree_lambda', 0.1))
+
     batch_size = points.shape[0]
     steps = self.args.inference_diffusion_steps
     time_schedule = InferenceSchedule(
@@ -163,16 +169,23 @@ class TSPModel(COMetaModel):
     # Initialize xt ~ Bernoulli(0.5)
     xt = (torch.randn_like(adj_matrix.float()) > 0).long()
 
-    # Preference application policy
+    # Preference application policy (RL) and Soft-length selection
     apply_last_k_only = bool(getattr(self.args, 'pref_apply_last_k_only', False))
     last_k_steps = int(getattr(self.args, 'pref_last_k_steps', 10))
     if apply_last_k_only:
       used_step_ids = list(range(max(0, steps - last_k_steps), steps))
     else:
-      # Only use the fully denoised heatmap (final step)
       used_step_ids = [steps - 1]
 
-    selected_edge_probs = []  # will hold p(edge=1) for selected steps only
+    soft_apply_last_k_only = bool(getattr(self.args, 'pref_softlen_apply_last_k_only', False))
+    soft_last_k_steps = int(getattr(self.args, 'pref_softlen_last_k_steps', 10))
+    if soft_apply_last_k_only:
+      soft_used_step_ids = list(range(max(0, steps - soft_last_k_steps), steps))
+    else:
+      soft_used_step_ids = [steps - 1]
+
+    selected_edge_probs = []  # RL: will hold p(edge=1) for RL-selected steps
+    softlen_edge_probs = []   # Softlen: p(edge=1) for soft-selected steps
 
     # Mixed precision context if available (reduces VRAM)
     use_mixed = False
@@ -182,9 +195,11 @@ class TSPModel(COMetaModel):
       use_mixed = bool(getattr(self.args, 'fp16', False))
 
     if not apply_last_k_only:
-      # Fast path: advance to the last step purely in inference mode, then do the final step with grad
+      # Fast path with optional softlen last-k gradients
+      last_k_start = max(0, steps - soft_last_k_steps) if soft_apply_last_k_only else steps - 1
+      # 1) Early steps in pure inference mode (no grads)
       with torch.inference_mode():
-        for i in range(max(0, steps - 1)):
+        for i in range(max(0, last_k_start)):
           t1, t2 = time_schedule(i)
           t1 = np.array([t1]).astype(int)
           t2 = np.array([t2]).astype(int)
@@ -198,8 +213,26 @@ class TSPModel(COMetaModel):
             )
             x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
           xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
-
-      # Final step with gradients
+      # 2) Optional last-k-1 steps with gradients for softlen
+      for i in range(max(0, last_k_start), max(0, steps - 1)):
+        t1, t2 = time_schedule(i)
+        t1 = np.array([t1]).astype(int)
+        t2 = np.array([t2]).astype(int)
+        t_tensor = torch.from_numpy(t1).view(1)
+        with torch.cuda.amp.autocast(enabled=use_mixed):
+          x0_pred = self.forward(
+              points.float().to(device),
+              xt.float().to(device),
+              t_tensor.float().to(device),
+              None,
+          )
+        if i in soft_used_step_ids:
+          p1_soft = self._edge_probs_from_logits(x0_pred, points)
+          softlen_edge_probs.append((i, p1_soft))
+        with torch.no_grad():
+          x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+          xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
+      # 3) Final step with gradients (RL always uses at least this)
       i = steps - 1
       t1, t2 = time_schedule(i)
       t1 = np.array([t1]).astype(int)
@@ -212,19 +245,21 @@ class TSPModel(COMetaModel):
             t_tensor.float().to(device),
             None,
         )
-      p1 = self._edge_probs_from_logits(x0_pred, points)  # (B, N, N)
-      selected_edge_probs.append((i, p1))
-
+      p1_final = self._edge_probs_from_logits(x0_pred, points)
+      selected_edge_probs.append((i, p1_final))
+      if i in soft_used_step_ids:
+        softlen_edge_probs.append((i, p1_final))
       with torch.no_grad():
         x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
         xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
     else:
-      # General path: compute over selected steps with grad, others in inference mode
+      # General path: compute with grads on union(RL last-k, Soft last-k)
+      grad_step_ids = set(used_step_ids).union(set(soft_used_step_ids))
       for i in range(steps):
         t1, t2 = time_schedule(i)
         t1 = np.array([t1]).astype(int)
         t2 = np.array([t2]).astype(int)
-        if i in used_step_ids:
+        if i in grad_step_ids:
           t_tensor = torch.from_numpy(t1).view(1)
           with torch.cuda.amp.autocast(enabled=use_mixed):
             x0_pred = self.forward(
@@ -233,8 +268,14 @@ class TSPModel(COMetaModel):
                 t_tensor.float().to(device),
                 None,
             )
-          p1 = self._edge_probs_from_logits(x0_pred, points)  # (B, N, N)
-          selected_edge_probs.append((i, p1))
+          # Record RL p1
+          if i in used_step_ids:
+            p1_rl = self._edge_probs_from_logits(x0_pred, points)
+            selected_edge_probs.append((i, p1_rl))
+          # Record softlen p1
+          if i in soft_used_step_ids:
+            p1_soft = self._edge_probs_from_logits(x0_pred, points)
+            softlen_edge_probs.append((i, p1_soft))
           with torch.no_grad():
             x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
             xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
@@ -251,90 +292,141 @@ class TSPModel(COMetaModel):
               x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
             xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
 
+    # Soft path-length auxiliary loss from heatmap, averaged over selected steps
+    softlen_loss = None
+    softlen_length_mean = None
+    softlen_degree_mean = None
+    if softlen_edge_probs:
+      # Precompute pairwise distances (detach to avoid grads through points)
+      dist_mat = torch.cdist(points.float(), points.float(), p=2).detach()
+      B, N, _ = dist_mat.shape
+      diag_mask = (1.0 - torch.eye(N, device=device)).unsqueeze(0)
+
+      acc_losses = []
+      acc_len = []
+      acc_deg = []
+      for (_, p1_batched) in softlen_edge_probs:
+        p = p1_batched.to(dist_mat.dtype)
+        p_sym = 0.5 * (p + p.transpose(-1, -2))
+        p_sym = p_sym * diag_mask  # zero diagonal
+
+        # Length: sum over undirected edges once
+        length_b = 0.5 * (p_sym * dist_mat).sum(dim=(-2, -1))  # (B,)
+        # Degree regularization
+        deg_b = p_sym.sum(dim=-1)  # (B, N)
+        deg_term_b = ((deg_b - 2.0) ** 2).mean(dim=-1)  # (B,)
+
+        acc_len.append(length_b.mean())
+        acc_deg.append(deg_term_b.mean())
+        acc_losses.append(length_b.mean() + softlen_degree_lambda * deg_term_b.mean())
+
+      softlen_length_mean = torch.stack(acc_len).mean()
+      softlen_degree_mean = torch.stack(acc_deg).mean()
+      softlen_loss = torch.stack(acc_losses).mean()
+
+    # Log soft loss components irrespective of weight for visibility
+    if softlen_loss is not None:
+      self.log("train/softlen_length", softlen_length_mean)
+      self.log("train/softlen_degree", softlen_degree_mean)
+      self.log("train/softlen_loss", softlen_loss)
+      self.log("train/softlen_weight", float(softlen_weight))
+      self.log("train/softlen_selected_steps", float(len(softlen_edge_probs)))
+
     # Decode heatmap and build preferences from multi-start greedy paths
-    if self.diffusion_type == 'categorical':
-      adj_mat_np = xt.float().cpu().detach().numpy() + 1e-6
+    pref_loss = torch.tensor(0.0, device=device, requires_grad=True)
+    if rl_w > 0.0:
+      if self.diffusion_type == 'categorical':
+        adj_mat_np = xt.float().cpu().detach().numpy() + 1e-6
+      else:
+        adj_mat_np = xt.cpu().detach().numpy() * 0.5 + 0.5
+
+      pref_beta = float(getattr(self.args, 'pref_beta', 1.0))
+      num_starts_cfg = int(getattr(self.args, 'pref_num_start_nodes', 8))
+      pairs_per_graph = int(getattr(self.args, 'pref_pairs_per_graph', 1))
+
+      batch_pref_losses = []
+      mean_margins = []
+
+      for b in range(batch_size):
+        np_points = points[b].detach().cpu().numpy()
+        n = np_points.shape[0]
+        # Sample start nodes (unique)
+        num_starts = min(num_starts_cfg, n)
+        start_nodes = torch.randperm(n)[:num_starts].tolist()
+        tours, _ = multi_start_tours(
+            adj_mat_np[b:b+1], np_points, edge_index_np=None,
+            start_nodes=start_nodes, sparse_graph=False,
+            random_tiebreak=bool(getattr(self.args, 'pref_decode_random_tiebreak', False)),
+            noise_scale=float(getattr(self.args, 'pref_decode_noise_scale', 1e-3)))
+
+        # Evaluate costs
+        tsp_solver = TSPEvaluator(np_points)
+        costs = [tsp_solver.evaluate(t) for t in tours]
+        best_idx = int(np.argmin(costs))
+        worse_pool = [i for i in range(len(tours)) if i != best_idx]
+        if not worse_pool:
+          continue  # degenerate case
+
+        # Form preference pairs: (best, sampled worse)
+        worse_sel = worse_pool if len(worse_pool) <= pairs_per_graph else list(np.random.choice(worse_pool, pairs_per_graph, replace=False))
+
+        for wi in worse_sel:
+          t_best = tours[best_idx]
+          t_worse = tours[wi]
+
+          # Aggregate loss across selected steps
+          pair_losses = []
+          margins = []
+          for (_, p1_batched) in selected_edge_probs:
+            p1_mat = p1_batched[b]  # (N, N)
+            logp_best = self._tour_logprob_from_edge_probs(p1_mat, t_best)
+            logp_worse = self._tour_logprob_from_edge_probs(p1_mat, t_worse)
+            margin = logp_best - logp_worse
+            margins.append(margin.detach())
+            # Pairwise preference: -log(sigmoid(beta * (logp_best - logp_worse)))
+            pair_losses.append(F.softplus(-pref_beta * margin))
+
+          if pair_losses:
+            pair_loss = torch.stack(pair_losses).mean()
+            batch_pref_losses.append(pair_loss)
+            mean_margins.append(torch.stack(margins).mean())
+
+      # Log selected steps count to audit VRAM invariance in default mode
+      self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
+
+      if not batch_pref_losses:
+        # Fallback: no pairs produced (unlikely). Keep zero.
+        self.log("train/pref_pairs", 0.0)
+        self.log("train/pref_margin", 0.0)
+      else:
+        pref_loss = torch.stack(batch_pref_losses).mean()
+        self.log("train/pref_pairs", float(len(batch_pref_losses)))
+        self.log("train/pref_margin", torch.stack(mean_margins).mean())
     else:
-      adj_mat_np = xt.cpu().detach().numpy() * 0.5 + 0.5
-
-    pref_beta = float(getattr(self.args, 'pref_beta', 1.0))
-    num_starts_cfg = int(getattr(self.args, 'pref_num_start_nodes', 8))
-    pairs_per_graph = int(getattr(self.args, 'pref_pairs_per_graph', 1))
-
-    batch_pref_losses = []
-    mean_margins = []
-
-    for b in range(batch_size):
-      np_points = points[b].detach().cpu().numpy()
-      n = np_points.shape[0]
-      # Sample start nodes (unique)
-      num_starts = min(num_starts_cfg, n)
-      start_nodes = torch.randperm(n)[:num_starts].tolist()
-      tours, _ = multi_start_tours(
-          adj_mat_np[b:b+1], np_points, edge_index_np=None,
-          start_nodes=start_nodes, sparse_graph=False,
-          random_tiebreak=bool(getattr(self.args, 'pref_decode_random_tiebreak', False)),
-          noise_scale=float(getattr(self.args, 'pref_decode_noise_scale', 1e-3)))
-
-      # Evaluate costs
-      tsp_solver = TSPEvaluator(np_points)
-      costs = [tsp_solver.evaluate(t) for t in tours]
-      best_idx = int(np.argmin(costs))
-      worse_pool = [i for i in range(len(tours)) if i != best_idx]
-      if not worse_pool:
-        continue  # degenerate case
-
-      # Form preference pairs: (best, sampled worse)
-      worse_sel = worse_pool if len(worse_pool) <= pairs_per_graph else list(np.random.choice(worse_pool, pairs_per_graph, replace=False))
-
-      for wi in worse_sel:
-        t_best = tours[best_idx]
-        t_worse = tours[wi]
-
-        # Aggregate loss across selected steps
-        pair_losses = []
-        margins = []
-        # Use edge probabilities only for selected steps (typically k=1 -> final)
-        for (_, p1_batched) in selected_edge_probs:
-          p1_mat = p1_batched[b]  # (N, N)
-          logp_best = self._tour_logprob_from_edge_probs(p1_mat, t_best)
-          logp_worse = self._tour_logprob_from_edge_probs(p1_mat, t_worse)
-          margin = logp_best - logp_worse
-          margins.append(margin.detach())
-          # Pairwise preference: -log(sigmoid(beta * (logp_best - logp_worse)))
-          pair_losses.append(F.softplus(-pref_beta * margin))
-
-        if pair_losses:
-          pair_loss = torch.stack(pair_losses).mean()
-          batch_pref_losses.append(pair_loss)
-          mean_margins.append(torch.stack(margins).mean())
-
-    # Log selected steps count to audit VRAM invariance in default mode
-    self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
-
-    if not batch_pref_losses:
-      # Fallback: no pairs produced (unlikely). Skip update with zero loss.
-      pref_loss = torch.tensor(0.0, device=device, requires_grad=True)
+      # No RL preference term requested
+      self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
       self.log("train/pref_pairs", 0.0)
       self.log("train/pref_margin", 0.0)
-    else:
-      pref_loss = torch.stack(batch_pref_losses).mean()
-      self.log("train/pref_pairs", float(len(batch_pref_losses)))
-      self.log("train/pref_margin", torch.stack(mean_margins).mean())
 
     # Optional supervised CE mixing during fine-tune
-    sup_w = float(getattr(self.args, 'pref_supervised_weight', 0.0))
-    rl_w = float(getattr(self.args, 'pref_rl_weight', 1.0))
+    total_loss = None
     if sup_w > 0.0:
       ce_loss = self.categorical_training_step(batch, batch_idx)
-      loss = rl_w * pref_loss + sup_w * ce_loss
-      # categorical_training_step already logs train/loss; log combined too
-      self.log("train/pref_loss", pref_loss)
-      self.log("train/total_loss", loss)
-      return loss
+      total_loss = sup_w * ce_loss
     else:
+      total_loss = torch.tensor(0.0, device=device, requires_grad=True)
+
+    # Add RL preference term
+    if rl_w > 0.0:
       self.log("train/pref_loss", pref_loss)
-      return pref_loss
+      total_loss = total_loss + rl_w * pref_loss
+
+    # Add soft length term
+    if softlen_weight > 0.0 and softlen_loss is not None:
+      total_loss = total_loss + softlen_weight * softlen_loss
+
+    self.log("train/total_loss", total_loss)
+    return total_loss
 
   def categorical_denoise_step(self, points, xt, t, device, edge_index=None, target_t=None):
     with torch.no_grad():

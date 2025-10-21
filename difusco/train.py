@@ -65,6 +65,16 @@ def arg_parser():
   parser.add_argument('--pref_decode_random_tiebreak', action='store_true', help='Use stochastic tie-break in merge/decoding from a single heatmap.')
   parser.add_argument('--pref_decode_noise_scale', type=float, default=1e-3, help='Noise scale for stochastic merge tie-break.')
 
+  # Soft path-length auxiliary loss (computed from heatmap)
+  parser.add_argument('--pref_softlen_weight', type=float, default=0.0,
+                      help='Weight for soft path-length auxiliary loss (0 disables).')
+  parser.add_argument('--pref_softlen_degree_lambda', type=float, default=0.1,
+                      help='Degree regularization coefficient for soft path-length loss.')
+  parser.add_argument('--pref_softlen_apply_last_k_only', action='store_true',
+                      help='Apply soft path-length loss to the last k denoising steps (otherwise only the last step).')
+  parser.add_argument('--pref_softlen_last_k_steps', type=int, default=10,
+                      help='How many last steps to apply soft path-length loss to when enabled.')
+
   parser.add_argument('--project_name', type=str, default='tsp_diffusion')
   parser.add_argument('--wandb_entity', type=str, default=None)
   parser.add_argument('--wandb_logger_name', type=str, default=None)
