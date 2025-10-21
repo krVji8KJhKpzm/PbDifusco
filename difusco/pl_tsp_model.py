@@ -174,38 +174,82 @@ class TSPModel(COMetaModel):
 
     selected_edge_probs = []  # will hold p(edge=1) for selected steps only
 
-    # Diffusion denoising; run no-grad except selected steps to keep VRAM flat
-    for i in range(steps):
+    # Mixed precision context if available (reduces VRAM)
+    use_mixed = False
+    try:
+      use_mixed = bool(str(getattr(self.trainer, 'precision', '32')).startswith('16')) or bool(getattr(self.args, 'fp16', False))
+    except Exception:
+      use_mixed = bool(getattr(self.args, 'fp16', False))
+
+    if not apply_last_k_only:
+      # Fast path: advance to the last step purely in inference mode, then do the final step with grad
+      with torch.inference_mode():
+        for i in range(max(0, steps - 1)):
+          t1, t2 = time_schedule(i)
+          t1 = np.array([t1]).astype(int)
+          t2 = np.array([t2]).astype(int)
+          t_tensor = torch.from_numpy(t1).view(1)
+          with torch.cuda.amp.autocast(enabled=use_mixed):
+            x0_pred = self.forward(
+                points.float().to(device),
+                xt.float().to(device),
+                t_tensor.float().to(device),
+                None,
+            )
+            x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+          xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
+
+      # Final step with gradients
+      i = steps - 1
       t1, t2 = time_schedule(i)
       t1 = np.array([t1]).astype(int)
       t2 = np.array([t2]).astype(int)
-
-      if i in used_step_ids:
-        t_tensor = torch.from_numpy(t1).view(1)
+      t_tensor = torch.from_numpy(t1).view(1)
+      with torch.cuda.amp.autocast(enabled=use_mixed):
         x0_pred = self.forward(
             points.float().to(device),
             xt.float().to(device),
             t_tensor.float().to(device),
             None,
         )
-        p1 = self._edge_probs_from_logits(x0_pred, points)  # (B, N, N)
-        selected_edge_probs.append((i, p1))
+      p1 = self._edge_probs_from_logits(x0_pred, points)  # (B, N, N)
+      selected_edge_probs.append((i, p1))
 
-        # Posterior update to next xt (no gradient through sampling)
-        with torch.no_grad():
-          x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
-          xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
-      else:
-        with torch.no_grad():
+      with torch.no_grad():
+        x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+        xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
+    else:
+      # General path: compute over selected steps with grad, others in inference mode
+      for i in range(steps):
+        t1, t2 = time_schedule(i)
+        t1 = np.array([t1]).astype(int)
+        t2 = np.array([t2]).astype(int)
+        if i in used_step_ids:
           t_tensor = torch.from_numpy(t1).view(1)
-          x0_pred = self.forward(
-              points.float().to(device),
-              xt.float().to(device),
-              t_tensor.float().to(device),
-              None,
-          )
-          x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
-          xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
+          with torch.cuda.amp.autocast(enabled=use_mixed):
+            x0_pred = self.forward(
+                points.float().to(device),
+                xt.float().to(device),
+                t_tensor.float().to(device),
+                None,
+            )
+          p1 = self._edge_probs_from_logits(x0_pred, points)  # (B, N, N)
+          selected_edge_probs.append((i, p1))
+          with torch.no_grad():
+            x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+            xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
+        else:
+          with torch.inference_mode():
+            t_tensor = torch.from_numpy(t1).view(1)
+            with torch.cuda.amp.autocast(enabled=use_mixed):
+              x0_pred = self.forward(
+                  points.float().to(device),
+                  xt.float().to(device),
+                  t_tensor.float().to(device),
+                  None,
+              )
+              x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
+            xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
 
     # Decode heatmap and build preferences from multi-start greedy paths
     if self.diffusion_type == 'categorical':
