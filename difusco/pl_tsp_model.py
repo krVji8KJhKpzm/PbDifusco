@@ -237,7 +237,7 @@ class TSPModel(COMetaModel):
       # Fast path with optional softlen last-k gradients
       last_k_start = max(0, steps - soft_last_k_steps) if soft_apply_last_k_only else steps - 1
       # 1) Early steps in pure inference mode (no grads)
-      with torch.inference_mode():
+      with torch.no_grad():
         for i in range(max(0, last_k_start)):
           t1, t2 = time_schedule(i)
           t1 = np.array([t1]).astype(int)
@@ -323,7 +323,7 @@ class TSPModel(COMetaModel):
             x0_pred_prob = x0_pred.permute((0, 2, 3, 1)).contiguous().softmax(dim=-1)
             xt = self.categorical_posterior(target_t=t2, t=t1, x0_pred_prob=x0_pred_prob, xt=xt)
         else:
-          with torch.inference_mode():
+          with torch.no_grad():
             t_tensor = torch.from_numpy(t1).view(1)
             with torch.cuda.amp.autocast(enabled=use_mixed):
               x0_pred = self.forward(
