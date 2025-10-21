@@ -36,6 +36,7 @@ def arg_parser():
   parser.add_argument('--num_workers', type=int, default=16)
   parser.add_argument('--fp16', action='store_true')
   parser.add_argument('--use_activation_checkpoint', action='store_true')
+  parser.add_argument('--devices', type=list, default=None, help='List of GPU device ids to use.')
 
   parser.add_argument('--diffusion_type', type=str, default='gaussian')
   parser.add_argument('--diffusion_schedule', type=str, default='linear')
@@ -175,7 +176,8 @@ def main(args):
 
   trainer = Trainer(
       accelerator="auto",
-      devices=torch.cuda.device_count() if torch.cuda.is_available() else None,
+    #   devices=torch.cuda.device_count() if torch.cuda.is_available() else None,
+      devices=args.devices,
       max_epochs=epochs,
       callbacks=[TQDMProgressBar(refresh_rate=20), checkpoint_callback, lr_callback],
       logger=wandb_logger,
