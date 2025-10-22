@@ -287,6 +287,22 @@ def run_sparse_layer(layer, time_layer, out_layer, adj_matrix, edge_index, add_t
   return custom_forward
 
 
+def run_dense_layer(layer, time_layer, out_layer, graph, add_time_on_edge=True):
+  def custom_forward(*inputs):
+    x_in = inputs[0]
+    e_in = inputs[1]
+    time_emb = inputs[2]
+    x, e = layer(x_in, e_in, graph, mode="direct")
+    if add_time_on_edge:
+      e = e + time_layer(time_emb)[:, None, None, :]
+    else:
+      x = x + time_layer(time_emb)[:, None, :]
+    x = x_in + x
+    e = e_in + out_layer(e)
+    return x, e
+  return custom_forward
+
+
 class GNNEncoder(nn.Module):
   """Configurable GNN Encoder
   """
@@ -368,7 +384,17 @@ class GNNEncoder(nn.Module):
       x_in, e_in = x, e
 
       if self.use_activation_checkpoint:
-        raise NotImplementedError
+        run_dense_layer_fn = functools.partial(
+            run_dense_layer,
+            add_time_on_edge=not self.node_feature_only,
+        )
+        out = activation_checkpoint.checkpoint(
+            run_dense_layer_fn(layer, time_layer, out_layer, graph),
+            x_in, e_in, time_emb,
+        )
+        x = out[0]
+        e = out[1]
+        continue
 
       x, e = layer(x, e, graph, mode="direct")
       if not self.node_feature_only:
