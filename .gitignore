@@ -6,3 +6,6 @@ __pycache__
 *.so
 *.o
 *.txt
+*.log
+*.ckpt
+/temp/
