@@ -438,9 +438,9 @@ class TSPModel(COMetaModel):
             real_adj, _ = build_real_adj_from_heatmap(sampled_adj[None, ...], np_points,
                                                       edge_index_np=None, sparse_graph=False,
                                                       random_tiebreak=False)
-            # Decode a single greedy tour (fixed start)
-            t = decode_tour_from_real_adj(real_adj, start_node=0, random_tiebreak=False)
-            tours.append(t)
+            for s in start_nodes:
+              t = decode_tour_from_real_adj(real_adj, start_node=s, random_tiebreak=False)
+              tours.append(t)
           else:
             # For each chosen step, sample K heatmaps and decode from multiple starts
             for si in step_ids:
@@ -452,9 +452,9 @@ class TSPModel(COMetaModel):
                 real_adj, _ = build_real_adj_from_heatmap(sampled_adj[None, ...], np_points,
                                                           edge_index_np=None, sparse_graph=False,
                                                           random_tiebreak=False)
-                # Decode a single greedy tour (fixed start)
-                t = decode_tour_from_real_adj(real_adj, start_node=0, random_tiebreak=False)
-                tours.append(t)
+                for s in start_nodes:
+                  t = decode_tour_from_real_adj(real_adj, start_node=s, random_tiebreak=False)
+                  tours.append(t)
         else:
           # Original path: multi-start greedy with optional stochastic tie-break
           tours, _ = multi_start_tours(
