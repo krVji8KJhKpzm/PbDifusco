@@ -12,7 +12,14 @@ from pytorch_lightning.utilities import rank_zero_info
 from co_datasets.tsp_graph_dataset import TSPGraphDataset
 from pl_meta_model import COMetaModel
 from utils.diffusion_schedulers import InferenceSchedule
-from utils.tsp_utils import TSPEvaluator, batched_two_opt_torch, merge_tours, multi_start_tours
+from utils.tsp_utils import (
+  TSPEvaluator,
+  batched_two_opt_torch,
+  merge_tours,
+  multi_start_tours,
+  build_real_adj_from_heatmap,
+  decode_tour_from_real_adj,
+)
 
 
 class TSPModel(COMetaModel):
@@ -383,6 +390,9 @@ class TSPModel(COMetaModel):
       else:
         adj_mat_np = xt.cpu().detach().numpy() * 0.5 + 0.5
 
+      # Train-only decode mode: sampling vs tie-break (default)
+      use_sampling_decode = bool(getattr(self.args, 'train_decode_sampling', False))
+
       pref_beta = float(getattr(self.args, 'pref_beta', 1.0))
       num_starts_cfg = int(getattr(self.args, 'pref_num_start_nodes', 8))
       pairs_per_graph = int(getattr(self.args, 'pref_pairs_per_graph', 1))
@@ -396,11 +406,36 @@ class TSPModel(COMetaModel):
         # Sample start nodes (unique)
         num_starts = min(num_starts_cfg, n)
         start_nodes = torch.randperm(n)[:num_starts].tolist()
-        tours, _ = multi_start_tours(
-            adj_mat_np[b:b+1], np_points, edge_index_np=None,
-            start_nodes=start_nodes, sparse_graph=False,
-            random_tiebreak=bool(getattr(self.args, 'pref_decode_random_tiebreak', False)),
-            noise_scale=float(getattr(self.args, 'pref_decode_noise_scale', 1e-3)))
+        if use_sampling_decode:
+          # Use last-step predicted edge probabilities to sample a heatmap,
+          # then decode greedily from multiple start nodes for diverse tours.
+          tours = []
+          # Get last recorded p1 (probability of edge=1) from selected_edge_probs
+          p1_last = None
+          if selected_edge_probs:
+            p1_last = selected_edge_probs[-1][1]  # (B, N, N)
+          if p1_last is None:
+            # Fallback to using the current xt heatmap if probabilities unavailable
+            sampled_adj = adj_mat_np[b]
+          else:
+            p1_np = p1_last[b].detach().float().cpu().numpy()
+            # Bernoulli sample an adjacency heatmap from probabilities
+            rng = np.random.default_rng()
+            sampled_adj = (rng.random(p1_np.shape) < np.clip(p1_np, 0.0, 1.0)).astype(np.float32)
+          # Build real adjacency (greedy merge, deterministic) and decode greedy tours
+          real_adj, _ = build_real_adj_from_heatmap(sampled_adj[None, ...], np_points,
+                                                    edge_index_np=None, sparse_graph=False,
+                                                    random_tiebreak=False)
+          for s in start_nodes:
+            t = decode_tour_from_real_adj(real_adj, start_node=s, random_tiebreak=False)
+            tours.append(t)
+        else:
+          # Original path: multi-start greedy with optional stochastic tie-break
+          tours, _ = multi_start_tours(
+              adj_mat_np[b:b+1], np_points, edge_index_np=None,
+              start_nodes=start_nodes, sparse_graph=False,
+              random_tiebreak=bool(getattr(self.args, 'pref_decode_random_tiebreak', False)),
+              noise_scale=float(getattr(self.args, 'pref_decode_noise_scale', 1e-3)))
 
         # Evaluate costs
         tsp_solver = TSPEvaluator(np_points)

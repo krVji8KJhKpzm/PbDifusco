@@ -65,6 +65,12 @@ def arg_parser():
   parser.add_argument('--pref_decode_random_tiebreak', action='store_true', help='Use stochastic tie-break in merge/decoding from a single heatmap.')
   parser.add_argument('--pref_decode_noise_scale', type=float, default=1e-3, help='Noise scale for stochastic merge tie-break.')
 
+  # Train-only decode strategy for generating diverse tours
+  # If enabled, training (preference RL) will sample adjacency from predicted probabilities
+  # to produce diverse solutions instead of using tie-break noise. Validation/test remain greedy.
+  parser.add_argument('--train_decode_sampling', action='store_true',
+                      help='Use sampling (vs tie-break) during training decode to get diverse tours. Eval stays greedy.')
+
   # Soft path-length auxiliary loss (computed from heatmap)
   parser.add_argument('--pref_softlen_weight', type=float, default=0.0,
                       help='Weight for soft path-length auxiliary loss (0 disables).')
