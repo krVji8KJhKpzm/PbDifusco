@@ -70,6 +70,10 @@ def arg_parser():
   # to produce diverse solutions instead of using tie-break noise. Validation/test remain greedy.
   parser.add_argument('--train_decode_sampling', action='store_true',
                       help='Use sampling (vs tie-break) during training decode to get diverse tours. Eval stays greedy.')
+  parser.add_argument('--train_sampling_use_last_k', action='store_true',
+                      help='When using training sampling, sample from each of the last-k selected steps instead of only the final step.')
+  parser.add_argument('--train_sampling_K', type=int, default=1,
+                      help='When using training sampling, number of independent heatmaps to sample per step (>=1).')
 
   # Soft path-length auxiliary loss (computed from heatmap)
   parser.add_argument('--pref_softlen_weight', type=float, default=0.0,

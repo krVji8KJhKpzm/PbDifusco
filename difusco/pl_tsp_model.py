@@ -392,6 +392,8 @@ class TSPModel(COMetaModel):
 
       # Train-only decode mode: sampling vs tie-break (default)
       use_sampling_decode = bool(getattr(self.args, 'train_decode_sampling', False))
+      use_last_k_for_sampling = bool(getattr(self.args, 'train_sampling_use_last_k', False))
+      K_sampling = max(1, int(getattr(self.args, 'train_sampling_K', 1)))
 
       pref_beta = float(getattr(self.args, 'pref_beta', 1.0))
       num_starts_cfg = int(getattr(self.args, 'pref_num_start_nodes', 8))
@@ -407,28 +409,52 @@ class TSPModel(COMetaModel):
         num_starts = min(num_starts_cfg, n)
         start_nodes = torch.randperm(n)[:num_starts].tolist()
         if use_sampling_decode:
-          # Use last-step predicted edge probabilities to sample a heatmap,
-          # then decode greedily from multiple start nodes for diverse tours.
+          # Use predicted edge probabilities to sample heatmaps,
+          # then decode greedily (deterministic) from multiple start nodes.
           tours = []
-          # Get last recorded p1 (probability of edge=1) from selected_edge_probs
-          p1_last = None
-          if selected_edge_probs:
-            p1_last = selected_edge_probs[-1][1]  # (B, N, N)
-          if p1_last is None:
-            # Fallback to using the current xt heatmap if probabilities unavailable
-            sampled_adj = adj_mat_np[b]
+
+          # Build a dict {step_id: p1_batched} for steps where we recorded probabilities
+          p1_by_step = {int(si): p1b for (si, p1b) in selected_edge_probs} if selected_edge_probs else {}
+
+          # Decide which steps to use for sampling
+          if use_last_k_for_sampling and len(p1_by_step) > 0:
+            # Intersect recorded steps with RL selected steps to be safe
+            step_ids = [s for s in used_step_ids if s in p1_by_step]
+            if not step_ids and len(p1_by_step) > 0:
+              # Fallback to whatever we have (e.g., only final step was recorded)
+              step_ids = [sorted(p1_by_step.keys())[-1]]
           else:
-            p1_np = p1_last[b].detach().float().cpu().numpy()
-            # Bernoulli sample an adjacency heatmap from probabilities
-            rng = np.random.default_rng()
-            sampled_adj = (rng.random(p1_np.shape) < np.clip(p1_np, 0.0, 1.0)).astype(np.float32)
-          # Build real adjacency (greedy merge, deterministic) and decode greedy tours
-          real_adj, _ = build_real_adj_from_heatmap(sampled_adj[None, ...], np_points,
-                                                    edge_index_np=None, sparse_graph=False,
-                                                    random_tiebreak=False)
-          for s in start_nodes:
-            t = decode_tour_from_real_adj(real_adj, start_node=s, random_tiebreak=False)
+            # Only use final step (if available); fallback to empty list
+            if len(p1_by_step) > 0:
+              step_ids = [sorted(p1_by_step.keys())[-1]]
+            else:
+              step_ids = []
+
+          rng = np.random.default_rng()
+
+          if not step_ids:
+            # No probabilities recorded (unexpected). Fallback: use xt heatmap once.
+            sampled_adj = adj_mat_np[b]
+            real_adj, _ = build_real_adj_from_heatmap(sampled_adj[None, ...], np_points,
+                                                      edge_index_np=None, sparse_graph=False,
+                                                      random_tiebreak=False)
+            # Decode a single greedy tour (fixed start)
+            t = decode_tour_from_real_adj(real_adj, start_node=0, random_tiebreak=False)
             tours.append(t)
+          else:
+            # For each chosen step, sample K heatmaps and decode from multiple starts
+            for si in step_ids:
+              p1_batched = p1_by_step[si]            # (B, N, N)
+              p1_np = p1_batched[b].detach().float().cpu().numpy()
+              p1_np = np.clip(p1_np, 0.0, 1.0)
+              for _k in range(K_sampling):
+                sampled_adj = (rng.random(p1_np.shape) < p1_np).astype(np.float32)
+                real_adj, _ = build_real_adj_from_heatmap(sampled_adj[None, ...], np_points,
+                                                          edge_index_np=None, sparse_graph=False,
+                                                          random_tiebreak=False)
+                # Decode a single greedy tour (fixed start)
+                t = decode_tour_from_real_adj(real_adj, start_node=0, random_tiebreak=False)
+                tours.append(t)
         else:
           # Original path: multi-start greedy with optional stochastic tie-break
           tours, _ = multi_start_tours(
