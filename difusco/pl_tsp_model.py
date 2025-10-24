@@ -1,6 +1,7 @@
 """Lightning module for training the DIFUSCO TSP model."""
 
 import os
+import warnings
 
 import numpy as np
 import torch
@@ -19,6 +20,7 @@ from utils.tsp_utils import (
   multi_start_tours,
   build_real_adj_from_heatmap,
   decode_tour_from_real_adj,
+  deduplicate_tours,
 )
 
 
@@ -463,12 +465,19 @@ class TSPModel(COMetaModel):
               random_tiebreak=bool(getattr(self.args, 'pref_decode_random_tiebreak', False)),
               noise_scale=float(getattr(self.args, 'pref_decode_noise_scale', 1e-3)))
 
+        # De-duplicate tours (rotation/reversal equivalence) before evaluation
+        tours = deduplicate_tours(tours)
+
         # Evaluate costs
         tsp_solver = TSPEvaluator(np_points)
         costs = [tsp_solver.evaluate(t) for t in tours]
         best_idx = int(np.argmin(costs))
         worse_pool = [i for i in range(len(tours)) if i != best_idx]
         if not worse_pool:
+          warnings.warn(
+              f"No preference pair formed for sample index {b}: only one unique greedy tour",
+              RuntimeWarning,
+          )
           continue  # degenerate case
 
         # Form preference pairs: (best, sampled worse)
@@ -502,6 +511,10 @@ class TSPModel(COMetaModel):
         # Fallback: no pairs produced (unlikely). Keep zero.
         self.log("train/pref_pairs", 0.0)
         self.log("train/pref_margin", 0.0)
+        warnings.warn(
+            "No preference pairs were formed in this batch (all graphs degenerated to a single unique tour).",
+            RuntimeWarning,
+        )
       else:
         pref_loss = torch.stack(batch_pref_losses).mean()
         self.log("train/pref_pairs", float(len(batch_pref_losses)))

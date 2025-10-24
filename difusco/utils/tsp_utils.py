@@ -274,3 +274,57 @@ def multi_start_tours(adj_mat, np_points, edge_index_np=None, start_nodes=None, 
   tours = [decode_tour_from_real_adj(real_adj_mat, s, random_tiebreak=random_tiebreak, rng=rng)
            for s in start_nodes]
   return tours, merge_iterations
+
+
+# ===== Tour canonicalization and de-duplication =====
+def canonicalize_tour(tour):
+  """Return a canonical tuple representation of a TSP tour (cycle).
+
+  The canonicalization ignores the closing node (if repeated), is invariant to
+  rotation and reversal, and returns the lexicographically smallest sequence.
+  """
+  # Convert to list of ints
+  if isinstance(tour, np.ndarray):
+    seq = tour.tolist()
+  else:
+    seq = list(tour)
+
+  # Drop closing node if present (e.g., [0, 1, 2, 0])
+  if len(seq) >= 2 and seq[0] == seq[-1]:
+    seq = seq[:-1]
+
+  n = len(seq)
+  if n == 0:
+    return tuple()
+
+  # Generate rotations for both directions
+  def rotations(s):
+    for r in range(n):
+      yield s[r:] + s[:r]
+
+  forward = seq
+  backward = list(reversed(seq))
+  candidates = list(rotations(forward)) + list(rotations(backward))
+  # Choose lexicographically smallest
+  best = min(tuple(c) for c in candidates)
+  return best
+
+
+def deduplicate_tours(tours):
+  """Deduplicate tours by canonical form, preserving first occurrence order.
+
+  Args:
+    tours: list of tours (each a list/array of node indices; may include closing node)
+
+  Returns:
+    unique_tours: list of tours with duplicates (up to rotation/reversal) removed
+  """
+  seen = set()
+  unique_tours = []
+  for t in tours:
+    key = canonicalize_tour(t)
+    if key in seen:
+      continue
+    seen.add(key)
+    unique_tours.append(t)
+  return unique_tours
