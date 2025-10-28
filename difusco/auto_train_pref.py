@@ -56,14 +56,11 @@ def build_base_args(parser: argparse.ArgumentParser):
 
   # Preference RL args to forward into fine-tune stage
   parser.add_argument('--pref_beta', type=float, default=1.0)
-  parser.add_argument('--pref_num_start_nodes', type=int, default=8)
   parser.add_argument('--pref_pairs_per_graph', type=int, default=1)
   parser.add_argument('--pref_apply_last_k_only', action='store_true')
   parser.add_argument('--pref_last_k_steps', type=int, default=10)
   parser.add_argument('--pref_supervised_weight', type=float, default=0.0)
   parser.add_argument('--pref_rl_weight', type=float, default=1.0)
-  parser.add_argument('--pref_decode_random_tiebreak', action='store_true')
-  parser.add_argument('--pref_decode_noise_scale', type=float, default=1e-3)
 
   # Auto-train orchestration knobs
   parser.add_argument('--auto_supervised_epochs', type=int, default=50)
@@ -122,7 +119,6 @@ def to_argv(args: argparse.Namespace, phase_epochs: int, extra_flags: list):
   # Preference args (only meaningful in fine-tune stage, but safe to pass always)
   argv += [
       '--pref_beta', str(args.pref_beta),
-      '--pref_num_start_nodes', str(args.pref_num_start_nodes),
       '--pref_pairs_per_graph', str(args.pref_pairs_per_graph),
       '--pref_last_k_steps', str(args.pref_last_k_steps),
       '--pref_supervised_weight', str(args.pref_supervised_weight),
@@ -130,9 +126,7 @@ def to_argv(args: argparse.Namespace, phase_epochs: int, extra_flags: list):
   ]
   if args.pref_apply_last_k_only:
     argv += ['--pref_apply_last_k_only']
-  if args.pref_decode_random_tiebreak:
-    argv += ['--pref_decode_random_tiebreak']
-  argv += ['--pref_decode_noise_scale', str(args.pref_decode_noise_scale)]
+  # tiebreak noise removed
 
   argv += extra_flags
   return argv

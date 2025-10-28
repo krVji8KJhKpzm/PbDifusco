@@ -56,34 +56,22 @@ def arg_parser():
   # Preference RL fine-tuning (on top of supervised pretraining)
   parser.add_argument('--pref_rl', action='store_true', help='Enable preference RL fine-tuning for TSP.')
   parser.add_argument('--pref_beta', type=float, default=1.0, help='Inverse-temperature for preference loss.')
-  parser.add_argument('--pref_num_start_nodes', type=int, default=8, help='Number of start nodes per heatmap to decode for preferences.')
   parser.add_argument('--pref_pairs_per_graph', type=int, default=1, help='Number of preference pairs per graph (best vs sampled worse).')
   parser.add_argument('--pref_apply_last_k_only', action='store_true', help='Apply preference loss only to the last k denoising steps.')
   parser.add_argument('--pref_last_k_steps', type=int, default=10, help='How many last steps to apply preference loss to.')
   parser.add_argument('--pref_supervised_weight', type=float, default=0.0, help='Optional mixing weight for supervised CE during fine-tune.')
   parser.add_argument('--pref_rl_weight', type=float, default=1.0, help='Weight for preference RL loss when mixed with supervised.')
-  parser.add_argument('--pref_decode_random_tiebreak', action='store_true', help='Use stochastic tie-break in merge/decoding from a single heatmap.')
-  parser.add_argument('--pref_decode_noise_scale', type=float, default=1e-3, help='Noise scale for stochastic merge tie-break.')
+  # Preference source and 2-opt generation controls
+  parser.add_argument('--pref_source', type=str, default='twoopt',
+                      help="Source of preference pairs: 'twoopt' (greedy decode + 2-opt improvements) or 'degrade' (worse mutations).")
+  parser.add_argument('--pref_2opt_steps', type=int, default=4,
+                      help='Number of incremental 2-opt improvements to attempt when building preference tours.')
+  parser.add_argument('--pref_2opt_pairing', type=str, default='chain',
+                      help="Pairing strategy for 2-opt tours: 'chain' (successive) or 'all' (all better-worse pairs up to cap).")
 
-  # Train-only decode strategy for generating diverse tours
-  # If enabled, training (preference RL) will sample adjacency from predicted probabilities
-  # to produce diverse solutions instead of using tie-break noise. Validation/test remain greedy.
-  parser.add_argument('--train_decode_sampling', action='store_true',
-                      help='Use sampling (vs tie-break) during training decode to get diverse tours. Eval stays greedy.')
-  parser.add_argument('--train_sampling_use_last_k', action='store_true',
-                      help='When using training sampling, sample from each of the last-k selected steps instead of only the final step.')
-  parser.add_argument('--train_sampling_K', type=int, default=1,
-                      help='When using training sampling, number of independent heatmaps to sample per step (>=1).')
+  # Note: multi-start decode, tiebreak noise, and training-time sampling removed from TSP.
 
-  # Soft path-length auxiliary loss (computed from heatmap)
-  parser.add_argument('--pref_softlen_weight', type=float, default=0.0,
-                      help='Weight for soft path-length auxiliary loss (0 disables).')
-  parser.add_argument('--pref_softlen_degree_lambda', type=float, default=0.1,
-                      help='Degree regularization coefficient for soft path-length loss.')
-  parser.add_argument('--pref_softlen_apply_last_k_only', action='store_true',
-                      help='Apply soft path-length loss to the last k denoising steps (otherwise only the last step).')
-  parser.add_argument('--pref_softlen_last_k_steps', type=int, default=10,
-                      help='How many last steps to apply soft path-length loss to when enabled.')
+  # Soft path-length auxiliary loss removed
 
   # Anchor to pretrained to avoid drift (pure preference fine-tune stabilization)
   parser.add_argument('--pref_anchor_type', type=str, default='none',
