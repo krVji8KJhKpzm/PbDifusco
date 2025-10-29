@@ -502,7 +502,7 @@ class TSPModel(COMetaModel):
 
       if not batch_pref_losses:
         # Fallback: no pairs produced (unlikely). Keep zero.
-        self.log("train/pref_pairs", 0.0)
+        self.log("train/pref_pairs", 0.0, prog_bar=True, on_step=True)
         self.log("train/pref_margin", 0.0)
         warnings.warn(
             "No preference pairs were formed in this batch (all graphs degenerated to a single unique tour).",
@@ -510,13 +510,35 @@ class TSPModel(COMetaModel):
         )
       else:
         pref_loss = torch.stack(batch_pref_losses).mean()
-        self.log("train/pref_pairs", float(len(batch_pref_losses)))
+        self.log("train/pref_pairs", float(len(batch_pref_losses)), prog_bar=True, on_step=True)
         self.log("train/pref_margin", torch.stack(mean_margins).mean())
     else:
       # No RL preference term requested
       self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
-      self.log("train/pref_pairs", 0.0)
+      self.log("train/pref_pairs", 0.0, prog_bar=True, on_step=True)
       self.log("train/pref_margin", 0.0)
+
+    # Log per-step TSP cost from current forward inference heatmap (avg over batch)
+    # Uses greedy decode + limited 2-opt (pref_2opt_steps) for light cost.
+    try:
+      with torch.no_grad():
+        adj_mat_np = xt.float().detach().cpu().numpy() + 1e-6 if self.diffusion_type == 'categorical' else (xt.detach().cpu().numpy() * 0.5 + 0.5)
+        infer_costs = []
+        for b in range(batch_size):
+          np_points = points[b].detach().cpu().numpy()
+          tours, _ = merge_tours(
+              adj_mat_np[b][None, ...], np_points, None,
+              sparse_graph=False, parallel_sampling=1,
+          )
+          solved_tours, _ = batched_two_opt_torch(
+              np_points.astype("float64"), np.array(tours).astype('int64'),
+              max_iterations=int(getattr(self.args, 'pref_2opt_steps', 4)), device=device)
+          tsp_solver = TSPEvaluator(np_points)
+          infer_costs.append(tsp_solver.evaluate(solved_tours[0]))
+        if len(infer_costs) > 0:
+          self.log("train/infer_cost", float(np.mean(infer_costs)), prog_bar=True, on_step=True, sync_dist=True)
+    except Exception as e:
+      warnings.warn(f"Failed to compute training-step TSP cost: {e}")
 
     # Optional supervised CE mixing during fine-tune
     total_loss = None
