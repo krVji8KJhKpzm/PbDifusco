@@ -181,13 +181,28 @@ class TSPModel(COMetaModel):
     """Sum log-prob over directed edges along a closed tour.
     p1_mat: (N, N) torch tensor of p(edge=1)
     tour: list/array of node indices, length N+1 with closure
+
+    Mode:
+      - 'edge' (default): use raw Bernoulli p(edge=1)
+      - 'row': normalize per-row so outgoing probs sum to 1 (ignores diag)
     """
-    eps = 1e-9
+    mode = str(getattr(self.args, 'pref_prob_mode', 'edge')).lower()
+    eps = 1e-12
+    if mode == 'row':
+      q = p1_mat.clone()
+      n = q.shape[0]
+      # Zero diagonal then renormalize rows
+      q = q - torch.diag(torch.diag(q))
+      row_sum = q.sum(dim=1, keepdim=True).clamp_min(eps)
+      q = q / row_sum
+      src = q
+    else:
+      src = p1_mat
     total = 0.0
     for i in range(len(tour) - 1):
       u = int(tour[i])
       v = int(tour[i + 1])
-      total = total + torch.log(p1_mat[u, v].clamp_min(eps))
+      total = total + torch.log(src[u, v].clamp_min(eps))
     return total
 
   # ===== Placeholder preference constructor (deterministic + degraded tours) =====
@@ -461,6 +476,8 @@ class TSPModel(COMetaModel):
       batch_pref_losses = []
       mean_margins = []
 
+      total_pairs_batch = 0
+      effective_pairs_batch = 0
       for b in range(batch_size):
         np_points = points[b].detach().cpu().numpy()
         if pref_source == 'twoopt':
@@ -471,6 +488,9 @@ class TSPModel(COMetaModel):
           # Fallback to degraded tours (previous behavior)
           pairs = self._placeholder_preference_pairs(np_points, adj_mat_np[b], pairs_per_graph)
 
+        total_pairs_count = 0
+        effective_pairs_count = 0
+
         if not pairs:
           warnings.warn(
               f"No placeholder preference pair formed for sample index {b}",
@@ -478,7 +498,20 @@ class TSPModel(COMetaModel):
           )
           continue
 
+        # Build evaluator for cost-gap checks (if enabled)
+        tsp_eval_b = TSPEvaluator(np_points)
+        min_gap = float(getattr(self.args, 'pref_min_cost_improve', 0.0))
+
         for (t_best, t_worse) in pairs:
+          total_pairs_count += 1
+          # Optional cost-gap gating
+          if min_gap > 0.0:
+            try:
+              gap = float(tsp_eval_b.evaluate(t_worse) - tsp_eval_b.evaluate(t_best))
+            except Exception:
+              gap = 0.0
+            if gap < min_gap:
+              continue
 
           # Aggregate loss across selected steps
           pair_losses = []
@@ -493,9 +526,23 @@ class TSPModel(COMetaModel):
             pair_losses.append(F.softplus(-pref_beta * margin))
 
           if pair_losses:
-            pair_loss = torch.stack(pair_losses).mean()
-            batch_pref_losses.append(pair_loss)
-            mean_margins.append(torch.stack(margins).mean())
+            mean_margin = torch.stack(margins).mean()
+            # Margin gating: only apply if mean_margin <= threshold
+            margin_thr = float(getattr(self.args, 'pref_effective_margin', 0.0))
+            if mean_margin <= margin_thr:
+              effective_pairs_count += 1
+              pair_loss = torch.stack(pair_losses).mean()
+              batch_pref_losses.append(pair_loss)
+              mean_margins.append(mean_margin)
+
+        total_pairs_batch += total_pairs_count
+        effective_pairs_batch += effective_pairs_count
+
+      # Log aggregated totals across the batch
+      self.log("train/pref_pairs_total", float(total_pairs_batch), on_step=True)
+      self.log("train/pref_pairs_effective", float(effective_pairs_batch), on_step=True)
+      violate_rate = (effective_pairs_batch / total_pairs_batch) if total_pairs_batch > 0 else 0.0
+      self.log("train/pref_violate_rate", float(violate_rate), on_step=True, prog_bar=True)
 
       # Log selected steps count to audit VRAM invariance in default mode
       self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
@@ -503,6 +550,10 @@ class TSPModel(COMetaModel):
       if not batch_pref_losses:
         # Fallback: no pairs produced (unlikely). Keep zero.
         self.log("train/pref_pairs", 0.0, prog_bar=True, on_step=True)
+        # Also keep extended counters visible
+        self.log("train/pref_pairs_total", 0.0, on_step=True)
+        self.log("train/pref_pairs_effective", 0.0, on_step=True)
+        self.log("train/pref_violate_rate", 0.0, on_step=True, prog_bar=True)
         self.log("train/pref_margin", 0.0)
         warnings.warn(
             "No preference pairs were formed in this batch (all graphs degenerated to a single unique tour).",
@@ -516,6 +567,9 @@ class TSPModel(COMetaModel):
       # No RL preference term requested
       self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
       self.log("train/pref_pairs", 0.0, prog_bar=True, on_step=True)
+      self.log("train/pref_pairs_total", 0.0, on_step=True)
+      self.log("train/pref_pairs_effective", 0.0, on_step=True)
+      self.log("train/pref_violate_rate", 0.0, on_step=True, prog_bar=True)
       self.log("train/pref_margin", 0.0)
 
     # Log per-step TSP cost from current forward inference heatmap (avg over batch)
@@ -532,7 +586,7 @@ class TSPModel(COMetaModel):
           )
           solved_tours, _ = batched_two_opt_torch(
               np_points.astype("float64"), np.array(tours).astype('int64'),
-              max_iterations=int(getattr(self.args, 'pref_2opt_steps', 4)), device=device)
+              max_iterations=int(min(10, int(getattr(self.args, 'pref_2opt_steps', 4)))), device=device)
           tsp_solver = TSPEvaluator(np_points)
           infer_costs.append(tsp_solver.evaluate(solved_tours[0]))
         if len(infer_costs) > 0:

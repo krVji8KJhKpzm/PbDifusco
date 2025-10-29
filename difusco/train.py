@@ -8,6 +8,7 @@ import wandb
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint
 from pytorch_lightning.callbacks.progress import TQDMProgressBar
+from utils.progress_bar import KeyedTQDMProgressBar
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.strategies.ddp import DDPStrategy
 from pytorch_lightning.utilities import rank_zero_info
@@ -61,6 +62,12 @@ def arg_parser():
   parser.add_argument('--pref_last_k_steps', type=int, default=10, help='How many last steps to apply preference loss to.')
   parser.add_argument('--pref_supervised_weight', type=float, default=0.0, help='Optional mixing weight for supervised CE during fine-tune.')
   parser.add_argument('--pref_rl_weight', type=float, default=1.0, help='Weight for preference RL loss when mixed with supervised.')
+  parser.add_argument('--pref_effective_margin', type=float, default=0.0,
+                      help='Only count/apply pairs whose mean margin <= this threshold as effective.')
+  parser.add_argument('--pref_min_cost_improve', type=float, default=0.0,
+                      help='Minimum cost improvement (worse_cost - better_cost) to accept a pair.')
+  parser.add_argument('--pref_prob_mode', type=str, default='edge',
+                      help="Prob mode for tour logprob: 'edge' (raw p(edge=1)) or 'row' (row-normalized).")
   # Preference source and 2-opt generation controls
   parser.add_argument('--pref_source', type=str, default='twoopt',
                       help="Source of preference pairs: 'twoopt' (greedy decode + 2-opt improvements) or 'degrade' (worse mutations).")
@@ -89,6 +96,9 @@ def arg_parser():
   parser.add_argument('--resume_weight_only', action='store_true')
   parser.add_argument('--wandb_offline', action='store_true',
                       help='Run Weights & Biases in offline mode (no cloud sync).')
+
+  # Which metrics to display on the TQDM progress bar (comma-separated)
+  parser.add_argument('--progress_bar_keys', type=str, default='train/infer_cost,train/pref_pairs,train/pref_violate_rate')
 
   parser.add_argument('--do_train', action='store_true')
   parser.add_argument('--do_test', action='store_true')
@@ -179,11 +189,14 @@ def main(args):
   )
   lr_callback = LearningRateMonitor(logging_interval='step')
 
+  # Progress bar keys: keep it focused so important metrics show up
+  pb_keys = [k.strip() for k in str(getattr(args, 'progress_bar_keys', '')).split(',') if k.strip()]
+
   trainer = Trainer(
       accelerator="auto",
       devices=torch.cuda.device_count() if torch.cuda.is_available() else None,
       max_epochs=epochs,
-      callbacks=[TQDMProgressBar(refresh_rate=20), checkpoint_callback, lr_callback],
+      callbacks=[KeyedTQDMProgressBar(keys=pb_keys, refresh_rate=20), checkpoint_callback, lr_callback],
       logger=wandb_logger,
       check_val_every_n_epoch=1,
       strategy=DDPStrategy(static_graph=True),
