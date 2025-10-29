@@ -461,6 +461,8 @@ class TSPModel(COMetaModel):
       batch_pref_losses = []
       mean_margins = []
 
+      non_pair_nums = 0
+
       for b in range(batch_size):
         np_points = points[b].detach().cpu().numpy()
         if pref_source == 'twoopt':
@@ -472,10 +474,11 @@ class TSPModel(COMetaModel):
           pairs = self._placeholder_preference_pairs(np_points, adj_mat_np[b], pairs_per_graph)
 
         if not pairs:
-          warnings.warn(
-              f"No placeholder preference pair formed for sample index {b}",
-              RuntimeWarning,
-          )
+        #   warnings.warn(
+        #       f"No placeholder preference pair formed for sample index {b}",
+        #       RuntimeWarning,
+        #   )
+          non_pair_nums += 1
           continue
 
         for (t_best, t_worse) in pairs:
@@ -496,6 +499,12 @@ class TSPModel(COMetaModel):
             pair_loss = torch.stack(pair_losses).mean()
             batch_pref_losses.append(pair_loss)
             mean_margins.append(torch.stack(margins).mean())
+
+      if non_pair_nums > 0:
+        warnings.warn(
+            f"No preference pairs formed for {non_pair_nums}/{batch_size} samples in the batch.",
+            RuntimeWarning,
+        )
 
       # Log selected steps count to audit VRAM invariance in default mode
       self.log("train/pref_selected_steps", float(len(selected_edge_probs)))
