@@ -496,7 +496,6 @@ class TSPModel(COMetaModel):
         #       f"No placeholder preference pair formed for sample index {b}",
         #       RuntimeWarning,
         #   )
-          non_pair_nums += 1
           continue
 
         # Build evaluator for cost-gap checks (if enabled)
