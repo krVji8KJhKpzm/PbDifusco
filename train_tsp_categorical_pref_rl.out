@@ -1,8 +1,8 @@
-wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id u0cow9c8.
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id ui06qokv.
 wandb: Tracking run with wandb version 0.13.9
 wandb: W&B syncing is set to `offline` in this directory.  
 wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
-Logging to ./temp/models/tsp_diffusion/u0cow9c8
+Logging to ./temp/models/tsp_diffusion/ui06qokv
 Loaded "./temp/data/tsp/tsp100_auto_train.txt" with 100000 lines
 Loaded "./temp/data/tsp/tsp100_auto_test.txt" with 1000 lines
 Loaded "./temp/data/tsp/tsp100_auto_val.txt" with 1000 lines
@@ -274,11 +274,7 @@ Loaded "./temp/data/tsp/tsp100_auto_val.txt" with 1000 lines
 Loaded "./temp/data/tsp/tsp100_auto_train.txt" with 100000 lines
 Loaded "./temp/data/tsp/tsp100_auto_test.txt" with 1000 lines
 Loaded "./temp/data/tsp/tsp100_auto_val.txt" with 1000 lines
-LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [1,2,3]
-LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [1,2,3]
 LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [1,2,3]
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/nn/parallel/distributed.py:1754: UserWarning: You passed find_unused_parameters=true to DistributedDataParallel, `_set_static_graph` will detect unused parameters automatically, so you do not need to set find_unused_parameters=true, just be sure these unused parameters will not change during training loop while calling `_set_static_graph`.
-  "You passed find_unused_parameters=true to DistributedDataParallel, "
 Parameters: 5333762
 Training steps: 10410
 
@@ -291,9 +287,11 @@ Training steps: 10410
 5.3 M     Total params
 21.335    Total estimated model params size (MB)
 Froze bottom 6 GNN layers for fine-tuning
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [1,2,3]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [1,2,3]
 Built L2SP anchor snapshot for 168 params.
 Sanity Checking: 0it [00:00, ?it/s]Validation dataset size: 64
-Sanity Checking:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:00<00:00,  2.20it/s]                                                                           /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:241: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 256 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+Sanity Checking:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:00<00:00,  2.30it/s]                                                                           /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:241: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 256 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
   category=PossibleUserWarning,
 /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
   warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
@@ -302,1327 +300,24 @@ Built L2SP anchor snapshot for 168 params.
 /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
   warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
 Training: 0it [00:00, ?it/s]Training:   0%|          | 0/1063 [00:00<?, ?it/s]Epoch 0:   0%|          | 0/1063 [00:00<?, ?it/s] Validation dataset size: 64
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/nn/parallel/distributed.py:1754: UserWarning: You passed find_unused_parameters=true to DistributedDataParallel, `_set_static_graph` will detect unused parameters automatically, so you do not need to set find_unused_parameters=true, just be sure these unused parameters will not change during training loop while calling `_set_static_graph`.
-  "You passed find_unused_parameters=true to DistributedDataParallel, "
 /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
   warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
 /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
   warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
 Validation dataset size: 64
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/nn/parallel/distributed.py:1754: UserWarning: You passed find_unused_parameters=true to DistributedDataParallel, `_set_static_graph` will detect unused parameters automatically, so you do not need to set find_unused_parameters=true, just be sure these unused parameters will not change during training loop while calling `_set_static_graph`.
-  "You passed find_unused_parameters=true to DistributedDataParallel, "
 /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
   warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
 /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
   warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-Epoch 0:   2%|▏         | 20/1063 [04:09<3:36:28, 12.45s/it]Epoch 0:   2%|▏         | 20/1063 [04:09<3:36:28, 12.45s/it, loss=4.92, v_num=w9c8, train/pref_pairs=17.00, train/infer_cost=7.770, train/pref_violate_rate=0.347]/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-Epoch 0:   4%|▍         | 40/1063 [08:22<3:34:16, 12.57s/it, loss=4.92, v_num=w9c8, train/pref_pairs=17.00, train/infer_cost=7.770, train/pref_violate_rate=0.347]Epoch 0:   4%|▍         | 40/1063 [08:22<3:34:16, 12.57s/it, loss=3.11, v_num=w9c8, train/pref_pairs=19.00, train/infer_cost=7.800, train/pref_violate_rate=0.279]Epoch 0:   6%|▌         | 60/1063 [13:44<3:49:43, 13.74s/it, loss=3.11, v_num=w9c8, train/pref_pairs=19.00, train/infer_cost=7.800, train/pref_violate_rate=0.279]Epoch 0:   6%|▌         | 60/1063 [13:44<3:49:43, 13.74s/it, loss=1.95, v_num=w9c8, train/pref_pairs=46.00, train/infer_cost=7.930, train/pref_violate_rate=0.393]/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-Epoch 0:   8%|▊         | 80/1063 [19:43<4:02:28, 14.80s/it, loss=1.95, v_num=w9c8, train/pref_pairs=46.00, train/infer_cost=7.930, train/pref_violate_rate=0.393]Epoch 0:   8%|▊         | 80/1063 [19:43<4:02:28, 14.80s/it, loss=0.877, v_num=w9c8, train/pref_pairs=56.00, train/infer_cost=8.180, train/pref_violate_rate=0.438]/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-Epoch 0:   9%|▉         | 100/1063 [25:39<4:07:06, 15.40s/it, loss=0.877, v_num=w9c8, train/pref_pairs=56.00, train/infer_cost=8.180, train/pref_violate_rate=0.438]Epoch 0:   9%|▉         | 100/1063 [25:39<4:07:06, 15.40s/it, loss=0.305, v_num=w9c8, train/pref_pairs=24.00, train/infer_cost=8.320, train/pref_violate_rate=0.188]Epoch 0:  11%|█▏        | 120/1063 [31:18<4:06:00, 15.65s/it, loss=0.305, v_num=w9c8, train/pref_pairs=24.00, train/infer_cost=8.320, train/pref_violate_rate=0.188]Epoch 0:  11%|█▏        | 120/1063 [31:18<4:06:00, 15.65s/it, loss=0.138, v_num=w9c8, train/pref_pairs=28.00, train/infer_cost=8.270, train/pref_violate_rate=0.219]/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-Epoch 0:  13%|█▎        | 140/1063 [36:48<4:02:37, 15.77s/it, loss=0.138, v_num=w9c8, train/pref_pairs=28.00, train/infer_cost=8.270, train/pref_violate_rate=0.219]Epoch 0:  13%|█▎        | 140/1063 [36:48<4:02:37, 15.77s/it, loss=0.0975, v_num=w9c8, train/pref_pairs=11.00, train/infer_cost=8.350, train/pref_violate_rate=0.0859]Epoch 0:  15%|█▌        | 160/1063 [42:11<3:58:07, 15.82s/it, loss=0.0975, v_num=w9c8, train/pref_pairs=11.00, train/infer_cost=8.350, train/pref_violate_rate=0.0859]Epoch 0:  15%|█▌        | 160/1063 [42:11<3:58:07, 15.82s/it, loss=0.0768, v_num=w9c8, train/pref_pairs=13.00, train/infer_cost=8.310, train/pref_violate_rate=0.102] /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-Epoch 0:  17%|█▋        | 180/1063 [47:26<3:52:41, 15.81s/it, loss=0.0768, v_num=w9c8, train/pref_pairs=13.00, train/infer_cost=8.310, train/pref_violate_rate=0.102]Epoch 0:  17%|█▋        | 180/1063 [47:26<3:52:41, 15.81s/it, loss=0.0624, v_num=w9c8, train/pref_pairs=9.000, train/infer_cost=8.420, train/pref_violate_rate=0.0703]/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-Epoch 0:  19%|█▉        | 200/1063 [52:34<3:46:51, 15.77s/it, loss=0.0624, v_num=w9c8, train/pref_pairs=9.000, train/infer_cost=8.420, train/pref_violate_rate=0.0703]Epoch 0:  19%|█▉        | 200/1063 [52:34<3:46:51, 15.77s/it, loss=0.061, v_num=w9c8, train/pref_pairs=11.00, train/infer_cost=8.360, train/pref_violate_rate=0.0859] /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
 /data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
   warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
-/data1/gushengda/PbDifusco/difusco/pl_tsp_model.py:560: RuntimeWarning: No preference pairs were formed in this batch (all graphs degenerated to a single unique tour).
-  RuntimeWarning,
 Traceback (most recent call last):
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 650, in _call_and_handle_interrupt
-    return trainer_fn(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 735, in _fit_impl
-    results = self._run(model, ckpt_path=self.ckpt_path)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1166, in _run
-    results = self._run_stage()
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1252, in _run_stage
-    return self._run_train()
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1283, in _run_train
-    self.fit_loop.run()
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
-    self.advance(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/fit_loop.py", line 271, in advance
-    self._outputs = self.epoch_loop.run(self._data_fetcher)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
-    self.advance(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/epoch/training_epoch_loop.py", line 203, in advance
-    batch_output = self.batch_loop.run(kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
-    self.advance(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/batch/training_batch_loop.py", line 87, in advance
-    outputs = self.optimizer_loop.run(optimizers, kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
-    self.advance(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 201, in advance
-    result = self._run_optimization(kwargs, self._optimizers[self.optim_progress.optimizer_position])
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 248, in _run_optimization
-    self._optimizer_step(optimizer, opt_idx, kwargs.get("batch_idx", 0), closure)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 367, in _optimizer_step
-    using_lbfgs=is_lbfgs,
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1550, in _call_lightning_module_hook
-    output = fn(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/module.py", line 1705, in optimizer_step
-    optimizer.step(closure=optimizer_closure)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/optimizer.py", line 168, in step
-    step_output = self._strategy.optimizer_step(self._optimizer, self._optimizer_idx, closure, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/ddp.py", line 289, in optimizer_step
-    optimizer_output = super().optimizer_step(optimizer, opt_idx, closure, model, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/strategy.py", line 216, in optimizer_step
-    return self.precision_plugin.optimizer_step(model, optimizer, opt_idx, closure, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 153, in optimizer_step
-    return optimizer.step(closure=closure, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/optim/optimizer.py", line 88, in wrapper
-    return func(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
-    return func(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/optim/adamw.py", line 100, in step
-    loss = closure()
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 138, in _wrap_closure
-    closure_result = closure()
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 146, in __call__
-    self._result = self.closure(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 132, in closure
-    step_output = self._step_fn()
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 407, in _training_step
-    training_step_output = self.trainer._call_strategy_hook("training_step", *kwargs.values())
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1704, in _call_strategy_hook
-    output = fn(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/ddp.py", line 352, in training_step
-    return self.model(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
-    return forward_call(*input, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/nn/parallel/distributed.py", line 947, in forward
-    if torch.is_grad_enabled() and self.reducer._rebuild_buckets():
-RuntimeError: Expected to have finished reduction in the prior iteration before starting a new one. This error indicates that your training graph has changed in this iteration, e.g., one parameter is used in first iteration, but then got unused in the second iteration. this is not compatible with static_graph set to True.
-Parameter indices which did not receive grad for rank 1: 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 ...
- In addition, you can set the environment variable TORCH_DISTRIBUTED_DEBUG to either INFO or DETAIL to print out information about which particular parameters did not receive gradient on this rank as part of this error
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/data1/gushengda/PbDifusco/difusco/train.py", line 233, in <module>
+  File "/data1/gushengda/PbDifusco/difusco/train.py", line 241, in <module>
     main(args)
-  File "/data1/gushengda/PbDifusco/difusco/train.py", line 217, in main
+  File "/data1/gushengda/PbDifusco/difusco/train.py", line 225, in main
     trainer.fit(model)
   File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 697, in fit
     self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 662, in _call_and_handle_interrupt
-    self.strategy.reconciliate_processes(traceback.format_exc())
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/ddp.py", line 454, in reconciliate_processes
-    raise DeadlockDetectedException(f"DeadLock detected from rank: {self.global_rank} \n {trace}")
-pytorch_lightning.utilities.exceptions.DeadlockDetectedException: DeadLock detected from rank: 1 
- Traceback (most recent call last):
   File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 650, in _call_and_handle_interrupt
     return trainer_fn(*args, **kwargs)
   File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 735, in _fit_impl
@@ -1675,19 +370,203 @@ pytorch_lightning.utilities.exceptions.DeadlockDetectedException: DeadLock detec
     closure_result = closure()
   File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 146, in __call__
     self._result = self.closure(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 132, in closure
-    step_output = self._step_fn()
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 407, in _training_step
-    training_step_output = self.trainer._call_strategy_hook("training_step", *kwargs.values())
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 141, in closure
+    self._backward_fn(step_output.closure_loss)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 304, in backward_fn
+    self.trainer._call_strategy_hook("backward", loss, optimizer, opt_idx)
   File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1704, in _call_strategy_hook
     output = fn(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/ddp.py", line 352, in training_step
-    return self.model(*args, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
-    return forward_call(*input, **kwargs)
-  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/nn/parallel/distributed.py", line 947, in forward
-    if torch.is_grad_enabled() and self.reducer._rebuild_buckets():
-RuntimeError: Expected to have finished reduction in the prior iteration before starting a new one. This error indicates that your training graph has changed in this iteration, e.g., one parameter is used in first iteration, but then got unused in the second iteration. this is not compatible with static_graph set to True.
-Parameter indices which did not receive grad for rank 1: 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 ...
- In addition, you can set the environment variable TORCH_DISTRIBUTED_DEBUG to either INFO or DETAIL to print out information about which particular parameters did not receive gradient on this rank as part of this error
-
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/strategy.py", line 191, in backward
+    self.precision_plugin.backward(self.lightning_module, closure_loss, optimizer, optimizer_idx, *args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 80, in backward
+    model.backward(closure_loss, optimizer, optimizer_idx, *args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/module.py", line 1450, in backward
+    loss.backward(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/_tensor.py", line 363, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/__init__.py", line 175, in backward
+    allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/function.py", line 253, in apply
+    return user_fn(self, *args)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py", line 146, in backward
+    torch.autograd.backward(outputs_with_grad, args_with_grad)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/__init__.py", line 175, in backward
+    allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+RuntimeError: Expected to mark a variable ready only once. This error is caused by one of the following reasons: 1) Use of a module parameter outside the `forward` function. Please make sure model parameters are not shared across multiple concurrent forward-backward passes. or try to use _set_static_graph() as a workaround if this module graph does not change during training loop.2) Reused parameters in multiple reentrant backward passes. For example, if you use multiple `checkpoint` functions to wrap the same part of your model, it would result in the same set of parameters been used by different reentrant backward passes multiple times, and hence marking a variable ready multiple times. DDP does not support such use cases in default. You can try to use _set_static_graph() as a workaround if your module graph does not change over iterations.
+Parameter at index 251 has been marked as ready twice. This means that multiple autograd engine  hooks have fired for this particular parameter during this iteration. You can set the environment variable TORCH_DISTRIBUTED_DEBUG to either INFO or DETAIL to print parameter names for further debugging.
+/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
+Traceback (most recent call last):
+  File "difusco/train.py", line 241, in <module>
+    main(args)
+  File "difusco/train.py", line 225, in main
+    trainer.fit(model)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 697, in fit
+    self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 648, in _call_and_handle_interrupt
+    return self.strategy.launcher.launch(trainer_fn, *args, trainer=self, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 93, in launch
+    return function(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 735, in _fit_impl
+    results = self._run(model, ckpt_path=self.ckpt_path)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1166, in _run
+    results = self._run_stage()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1252, in _run_stage
+    return self._run_train()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1283, in _run_train
+    self.fit_loop.run()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/fit_loop.py", line 271, in advance
+    self._outputs = self.epoch_loop.run(self._data_fetcher)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/epoch/training_epoch_loop.py", line 203, in advance
+    batch_output = self.batch_loop.run(kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/batch/training_batch_loop.py", line 87, in advance
+    outputs = self.optimizer_loop.run(optimizers, kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 201, in advance
+    result = self._run_optimization(kwargs, self._optimizers[self.optim_progress.optimizer_position])
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 248, in _run_optimization
+    self._optimizer_step(optimizer, opt_idx, kwargs.get("batch_idx", 0), closure)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 367, in _optimizer_step
+    using_lbfgs=is_lbfgs,
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1550, in _call_lightning_module_hook
+    output = fn(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/module.py", line 1705, in optimizer_step
+    optimizer.step(closure=optimizer_closure)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/optimizer.py", line 168, in step
+    step_output = self._strategy.optimizer_step(self._optimizer, self._optimizer_idx, closure, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/ddp.py", line 289, in optimizer_step
+    optimizer_output = super().optimizer_step(optimizer, opt_idx, closure, model, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/strategy.py", line 216, in optimizer_step
+    return self.precision_plugin.optimizer_step(model, optimizer, opt_idx, closure, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 153, in optimizer_step
+    return optimizer.step(closure=closure, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/optim/optimizer.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/optim/adamw.py", line 100, in step
+    loss = closure()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 138, in _wrap_closure
+    closure_result = closure()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 146, in __call__
+    self._result = self.closure(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 141, in closure
+    self._backward_fn(step_output.closure_loss)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 304, in backward_fn
+    self.trainer._call_strategy_hook("backward", loss, optimizer, opt_idx)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1704, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/strategy.py", line 191, in backward
+    self.precision_plugin.backward(self.lightning_module, closure_loss, optimizer, optimizer_idx, *args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 80, in backward
+    model.backward(closure_loss, optimizer, optimizer_idx, *args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/module.py", line 1450, in backward
+    loss.backward(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/_tensor.py", line 363, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/__init__.py", line 175, in backward
+    allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/function.py", line 253, in apply
+    return user_fn(self, *args)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py", line 146, in backward
+    torch.autograd.backward(outputs_with_grad, args_with_grad)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/__init__.py", line 175, in backward
+    allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+RuntimeError: Expected to mark a variable ready only once. This error is caused by one of the following reasons: 1) Use of a module parameter outside the `forward` function. Please make sure model parameters are not shared across multiple concurrent forward-backward passes. or try to use _set_static_graph() as a workaround if this module graph does not change during training loop.2) Reused parameters in multiple reentrant backward passes. For example, if you use multiple `checkpoint` functions to wrap the same part of your model, it would result in the same set of parameters been used by different reentrant backward passes multiple times, and hence marking a variable ready multiple times. DDP does not support such use cases in default. You can try to use _set_static_graph() as a workaround if your module graph does not change over iterations.
+Parameter at index 251 has been marked as ready twice. This means that multiple autograd engine  hooks have fired for this particular parameter during this iteration. You can set the environment variable TORCH_DISTRIBUTED_DEBUG to either INFO or DETAIL to print parameter names for further debugging.
+wandb: Waiting for W&B process to finish... (failed 1).
+/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py:25: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn("None of the inputs have requires_grad=True. Gradients will be None")
+Traceback (most recent call last):
+  File "/data1/gushengda/PbDifusco/difusco/train.py", line 241, in <module>
+    main(args)
+  File "/data1/gushengda/PbDifusco/difusco/train.py", line 225, in main
+    trainer.fit(model)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 697, in fit
+    self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 650, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 735, in _fit_impl
+    results = self._run(model, ckpt_path=self.ckpt_path)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1166, in _run
+    results = self._run_stage()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1252, in _run_stage
+    return self._run_train()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1283, in _run_train
+    self.fit_loop.run()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/fit_loop.py", line 271, in advance
+    self._outputs = self.epoch_loop.run(self._data_fetcher)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/epoch/training_epoch_loop.py", line 203, in advance
+    batch_output = self.batch_loop.run(kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/batch/training_batch_loop.py", line 87, in advance
+    outputs = self.optimizer_loop.run(optimizers, kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 201, in advance
+    result = self._run_optimization(kwargs, self._optimizers[self.optim_progress.optimizer_position])
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 248, in _run_optimization
+    self._optimizer_step(optimizer, opt_idx, kwargs.get("batch_idx", 0), closure)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 367, in _optimizer_step
+    using_lbfgs=is_lbfgs,
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1550, in _call_lightning_module_hook
+    output = fn(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/module.py", line 1705, in optimizer_step
+    optimizer.step(closure=optimizer_closure)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/optimizer.py", line 168, in step
+    step_output = self._strategy.optimizer_step(self._optimizer, self._optimizer_idx, closure, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/ddp.py", line 289, in optimizer_step
+    optimizer_output = super().optimizer_step(optimizer, opt_idx, closure, model, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/strategy.py", line 216, in optimizer_step
+    return self.precision_plugin.optimizer_step(model, optimizer, opt_idx, closure, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 153, in optimizer_step
+    return optimizer.step(closure=closure, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/optim/optimizer.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/optim/adamw.py", line 100, in step
+    loss = closure()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 138, in _wrap_closure
+    closure_result = closure()
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 146, in __call__
+    self._result = self.closure(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 141, in closure
+    self._backward_fn(step_output.closure_loss)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 304, in backward_fn
+    self.trainer._call_strategy_hook("backward", loss, optimizer, opt_idx)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1704, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/strategies/strategy.py", line 191, in backward
+    self.precision_plugin.backward(self.lightning_module, closure_loss, optimizer, optimizer_idx, *args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 80, in backward
+    model.backward(closure_loss, optimizer, optimizer_idx, *args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/pytorch_lightning/core/module.py", line 1450, in backward
+    loss.backward(*args, **kwargs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/_tensor.py", line 363, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/__init__.py", line 175, in backward
+    allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/function.py", line 253, in apply
+    return user_fn(self, *args)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/utils/checkpoint.py", line 146, in backward
+    torch.autograd.backward(outputs_with_grad, args_with_grad)
+  File "/data1/anaconda3/envs/difusco/lib/python3.7/site-packages/torch/autograd/__init__.py", line 175, in backward
+    allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+RuntimeError: Expected to mark a variable ready only once. This error is caused by one of the following reasons: 1) Use of a module parameter outside the `forward` function. Please make sure model parameters are not shared across multiple concurrent forward-backward passes. or try to use _set_static_graph() as a workaround if this module graph does not change during training loop.2) Reused parameters in multiple reentrant backward passes. For example, if you use multiple `checkpoint` functions to wrap the same part of your model, it would result in the same set of parameters been used by different reentrant backward passes multiple times, and hence marking a variable ready multiple times. DDP does not support such use cases in default. You can try to use _set_static_graph() as a workaround if your module graph does not change over iterations.
+Parameter at index 251 has been marked as ready twice. This means that multiple autograd engine  hooks have fired for this particular parameter during this iteration. You can set the environment variable TORCH_DISTRIBUTED_DEBUG to either INFO or DETAIL to print parameter names for further debugging.
+wandb: - 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb: You can sync this run to the cloud by running:
+wandb: wandb sync ./temp/models/wandb/offline-run-20251031_073420-ui06qokv
+wandb: Find logs at: ./temp/models/wandb/offline-run-20251031_073420-ui06qokv/logs

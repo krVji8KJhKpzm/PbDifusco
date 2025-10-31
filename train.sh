@@ -22,8 +22,8 @@ nohup python difusco/train.py \
   --pref_pairs_per_graph 4 \
   --pref_2opt_pairing all \
   --pref_apply_last_k_only \
-  --pref_last_k_steps 4 \
-  --pref_rl_weight 0.02 \
+  --pref_last_k_steps 2 \
+  --pref_rl_weight 0.1 \
   --wandb_logger_name PbDifusco_TSP_Categorical_Pref_RL_2opt \
   --wandb_offline \
   --batch_size 32 \
@@ -32,8 +32,8 @@ nohup python difusco/train.py \
   --pref_freeze_bottom_layers 6 \
   --learning_rate 5e-6 \
   --use_activation_checkpoint \
-  --pref_prob_mode edge \
-  --pref_effective_margin 0.05 \
+  --pref_prob_mode row \
+  --pref_effective_margin 0.2 \
   --pref_min_cost_improve 0.01 \
   --progress_bar_keys "train/infer_cost,val/solved_cost,train/pref_pairs,train/pref_pairs_total,train/pref_pairs_effective,train/pref_violate_rate,train/anchor_loss,train/pref_selected_steps" \
   > train_tsp_categorical_pref_rl.out 2>&1 &
