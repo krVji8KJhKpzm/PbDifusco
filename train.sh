@@ -31,7 +31,7 @@ nohup python difusco/train.py \
   --pref_anchor_weight 5e-3 \
   --pref_freeze_bottom_layers 6 \
   --learning_rate 5e-6 \
-  --fp16 \
+  --use_activation_checkpoint \
   --pref_prob_mode edge \
   --pref_effective_margin 0.05 \
   --pref_min_cost_improve 0.01 \
