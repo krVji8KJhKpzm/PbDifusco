@@ -192,6 +192,14 @@ def main(args):
   # Progress bar keys: keep it focused so important metrics show up
   pb_keys = [k.strip() for k in str(getattr(args, 'progress_bar_keys', '')).split(',') if k.strip()]
 
+  # DDP strategy: preference RL introduces dynamic graphs (gated losses),
+  # so we relax static_graph and enable find_unused_parameters for stability.
+  use_static_graph = False if getattr(args, 'pref_rl', False) else True
+  ddp_strategy = DDPStrategy(
+      static_graph=use_static_graph,
+      find_unused_parameters=True if getattr(args, 'pref_rl', False) else False,
+  )
+
   trainer = Trainer(
       accelerator="auto",
       devices=torch.cuda.device_count() if torch.cuda.is_available() else None,
@@ -199,7 +207,7 @@ def main(args):
       callbacks=[KeyedTQDMProgressBar(keys=pb_keys, refresh_rate=20), checkpoint_callback, lr_callback],
       logger=wandb_logger,
       check_val_every_n_epoch=1,
-      strategy=DDPStrategy(static_graph=True),
+      strategy=ddp_strategy,
       precision=16 if args.fp16 else 32,
   )
 
